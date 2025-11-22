@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Allay 模板实战 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> Allay 模板实战 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <p>本指南将通过构建一个显示两篇文章的主页，串联讲解 Commands、Layouts、Scope 和 Variables 的实际应用。
+非开发用户无需关注涉及templates文件夹的内容。</p>
+<h2>项目结构</h2>
+<pre><code>content/
+├── index.md          # 主页内容
+├── post-1/
+│   └── index.md      # 第一篇文章
+└── post-2/
+    └── index.md      # 第二篇文章
+
+templates/
+├── index.html        # 主页模板
+├── base.html         # 基础布局模板
+└── components/
+    └── post-card.md  # 文章卡片组件
+</code></pre>
+<h2>第一步：创建文章内容</h2>
+<p>先创建两篇文章，放在 <code>content/post-1/index.md</code> 和 <code>content/post-2/index.md</code>。</p>
+<h3>第一篇文章 <code>content/post-1/index.md</code></h3>
+<pre><code class="language-markdown">---
+title: "Allay 模板系统入门指南"
+date: 2024-01-15
+description: "学习如何使用 Allay 模板系统创建漂亮的静态网站"
+excerpt: "本文介绍了 Allay 模板系统的基本概念和核心功能..."
+tags: ["allay", "模板", "入门"]
+---
+
+这里是文章的完整内容...
+</code></pre>
+<h3>第二篇文章 <code>content/post-2/index.md</code></h3>
+<pre><code class="language-markdown">---
+title: "高级模板技巧与最佳实践"
+date: 2024-01-20  
+description: "探索 Allay 模板系统的高级功能和性能优化技巧"
+excerpt: "深入了解条件渲染、循环优化和模板继承等高级功能..."
+tags: ["allay", "高级", "性能"]
+---
+
+这里是文章的完整内容...
+</code></pre>
+<h2>第二步：创建基础布局模板</h2>
+<p>注：非模版开发用户无需关注</p>
+<p><code>templates/base.html</code>:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;{: block "title" :}我的博客{: end :}&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;我的技术博客&lt;/h1&gt;
+        &lt;nav&gt;首页 | 关于 | 归档&lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        {: block "content" :}
+        &lt;!-- 内容将由子模板填充 --&gt;
+        {: end :}
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 我的博客. 使用 Allay 构建.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2>第三步：创建文章卡片组件</h2>
+<p><code>templates/components/post-card.md</code>:</p>
+<pre><code class="language-markdown">{--
+  文章卡片组件
+  接收参数：文章对象 $post
+-}
+&lt;article class="post-card"&gt;
+    &lt;h3&gt;{: $post.title :}&lt;/h3&gt;
+    
+    {- if $post.date -}
+    &lt;time class="post-date"&gt;
+        {: format_date $post.date "2006年1月2日" :}
+    &lt;/time&gt;
+    {- end -}
+    
+    {- if $post.description -}
+    &lt;p class="post-description"&gt;
+        {: truncate $post.description 25 :}...
+    &lt;/p&gt;
+    {- end -}
+    
+    {- if $post.tags -}
+    &lt;div class="post-tags"&gt;
+        {- for $tag: $post.tags -}
+        &lt;span class="tag"&gt;{: $tag :}&lt;/span&gt;
+        {- end -}
+    &lt;/div&gt;
+    {- end -}
+    
+    &lt;a href="{: $post.url :}" class="read-more"&gt;阅读全文&lt;/a&gt;
+&lt;/article&gt;
+</code></pre>
+<h2>第四步：创建主页模板</h2>
+<p><code>templates/index.html</code>:</p>
+<pre><code class="language-html">{- extends "base.html" -}
+
+{: block "title" :}
+最新文章 - 我的博客
+{: end :}
+
+{: block "content" :}
+&lt;section class="hero"&gt;
+    &lt;h2&gt;欢迎访问我的博客&lt;/h2&gt;
+    &lt;p&gt;这里分享技术知识和学习心得&lt;/p&gt;
+&lt;/section&gt;
+
+&lt;section class="recent-posts"&gt;
+    &lt;h2&gt;最新文章&lt;/h2&gt;
+    
+    {- set $recent_posts = (slice site.Pages 0 2) -}
+    
+    {- if $recent_posts -}
+    &lt;div class="posts-grid"&gt;
+        {- for $post: $recent_posts -}
+        {- include "components/post-card.md" $post -}
+        {- end -}
+    &lt;/div&gt;
+    {- else -}
+    &lt;p&gt;暂无文章，敬请期待...&lt;/p&gt;
+    {- end -}
+&lt;/section&gt;
+
+&lt;section class="blog-stats"&gt;
+    &lt;h3&gt;博客统计&lt;/h3&gt;
+    &lt;p&gt;总共 {: len site.Pages :} 篇文章&lt;/p&gt;
+    
+    {- set $all_tags = (list) -}
+    {- for $post: site.Pages -}
+        {- if $post.tags -}
+            {- for $tag: $post.tags -}
+                {- set $all_tags (append $all_tags $tag) -}
+            {- end -}
+        {- end -}
+    {- end -}
+    
+    &lt;p&gt;总共 {: len $all_tags :} 个标签&lt;/p&gt;
+&lt;/section&gt;
+{: end :}
+</code></pre>
+<h2>第五步：创建主页内容</h2>
+<p><code>content/index.md</code>:</p>
+<pre><code class="language-markdown">---
+title: "欢迎来到我的技术博客"
+description: "分享编程知识、技术教程和学习资源"
+template: index.html
+---
+
+这里的内容不会被显示，因为使用了自定义模板。
+但 front matter 中的元数据可以在模板中通过 `.title` 和 `.description` 访问。
+</code></pre>
+<h2>功能解析</h2>
+<h3>1. Scope（作用域）应用</h3>
+<ul>
+<li><strong>全局作用域</strong>: <code>site.Pages</code> 访问所有页面</li>
+<li><strong>页面作用域</strong>: <code>$post.title</code>, <code>$post.date</code> 访问文章属性</li>
+<li><strong>局部作用域</strong>: <code>$recent_posts</code>, <code>$all_tags</code> 局部变量</li>
+</ul>
+<h3>2. Commands（命令）使用</h3>
+<pre><code class="language-html">{- set $recent_posts = (slice site.Pages 0 2) -}  &lt;!-- 设置变量 --&gt;
+{- for $post: $recent_posts -}                  &lt;!-- 循环遍历 --&gt;
+{- if $post.tags -}                            &lt;!-- 条件判断 --&gt;
+{- include "components/post-card.md" $post -}   &lt;!-- 包含组件 --&gt;
+{- end -}                                       &lt;!-- 结束块 --&gt;
+</code></pre>
+<h3>3. Variables（变量）操作</h3>
+<pre><code class="language-html">{: $post.title :}                          &lt;!-- 直接输出 --&gt;
+{: format_date $post.date "2006年1月2日" :} &lt;!-- 函数处理 --&gt;
+{: truncate $post.description 25 :}        &lt;!-- 文本截断 --&gt;
+{: len site.Pages :}                       &lt;!-- 获取长度 --&gt;
+</code></pre>
+<h3>4. Layouts（布局）管理</h3>
+<ul>
+<li><strong>基础布局</strong>: <code>base.html</code> 提供整体页面结构</li>
+<li><strong>模板继承</strong>: <code>index.html</code> 继承并重写内容块</li>
+<li><strong>组件化</strong>: <code>post-card.md</code> 可重用的文章卡片</li>
+</ul>
+<p>详细用法请参见：</p>
+<ul>
+<li><a href="./commands.html">Commands 指令详解</a></li>
+<li><a href="./scope.html">Scope 作用域详解</a></li>
+<li><a href="./variables.html">Variables 变量详解</a></li>
+<li><a href="./layouts.html">Layouts 布局详解</a></li>
+</ul>
+<h2>最终渲染结果</h2>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;最新文章 - 我的博客&lt;/title&gt;
+    &lt;link rel="stylesheet" href="/css/style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;我的技术博客&lt;/h1&gt;
+        &lt;nav&gt;首页 | 关于 | 归档&lt;/nav&gt;
+    &lt;/header&gt;
+
+    &lt;main&gt;
+        &lt;section class="hero"&gt;
+            &lt;h2&gt;欢迎访问我的博客&lt;/h2&gt;
+            &lt;p&gt;这里分享技术知识和学习心得&lt;/p&gt;
+        &lt;/section&gt;
+
+        &lt;section class="recent-posts"&gt;
+            &lt;h2&gt;最新文章&lt;/h2&gt;
+            &lt;div class="posts-grid"&gt;
+                &lt;article class="post-card"&gt;
+                    &lt;h3&gt;Allay 模板系统入门指南&lt;/h3&gt;
+                    &lt;time class="post-date"&gt;2024年1月15日&lt;/time&gt;
+                    &lt;p class="post-description"&gt;学习如何使用 Allay 模板系统创建漂亮的静态网站...&lt;/p&gt;
+                    &lt;div class="post-tags"&gt;
+                        &lt;span class="tag"&gt;allay&lt;/span&gt;
+                        &lt;span class="tag"&gt;模板&lt;/span&gt;
+                        &lt;span class="tag"&gt;入门&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;a href="/post-1/" class="read-more"&gt;阅读全文&lt;/a&gt;
+                &lt;/article&gt;
+                
+                &lt;article class="post-card"&gt;
+                    &lt;h3&gt;高级模板技巧与最佳实践&lt;/h3&gt;
+                    &lt;time class="post-date"&gt;2024年1月20日&lt;/time&gt;
+                    &lt;p class="post-description"&gt;探索 Allay 模板系统的高级功能和性能优化技巧...&lt;/p&gt;
+                    &lt;div class="post-tags"&gt;
+                        &lt;span class="tag"&gt;allay&lt;/span&gt;
+                        &lt;span class="tag"&gt;高级&lt;/span&gt;
+                        &lt;span class="tag"&gt;性能&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;a href="/post-2/" class="read-more"&gt;阅读全文&lt;/a&gt;
+                &lt;/article&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+
+        &lt;section class="blog-stats"&gt;
+            &lt;h3&gt;博客统计&lt;/h3&gt;
+            &lt;p&gt;总共 3 篇文章&lt;/p&gt;
+            &lt;p&gt;总共 6 个标签&lt;/p&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+
+    &lt;footer&gt;
+        &lt;p&gt;&amp;copy; 2024 我的博客. 使用 Allay 构建.&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>这个实战示例展示了如何将 Allay 模板系统的各个功能模块有机结合，创建一个功能完整、结构清晰的博客主页。</p>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

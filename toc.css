@@ -1,0 +1,84 @@
+.toc-sidebar {
+    position: fixed;
+
+    top: 130px;
+
+    left: calc(50% + 500px);
+    right: auto;
+
+    width: 200px;
+
+    /* 高度限制：避免底部超出屏幕 */
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+
+    /* 视觉风格 */
+    background: var(--bg-elevated);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 1rem;
+    z-index: 90;
+
+    display: none;
+
+    /* 滚动条美化 */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-subtle) transparent;
+}
+
+@media (min-width: 1380px) {
+    .toc-sidebar {
+        display: block;
+    }
+}
+
+/* 标题样式 */
+.toc-sidebar h3.toc-title {
+    margin-top: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--fg);
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.6rem;
+    margin-bottom: 0.6rem;
+}
+
+/* 链接样式优化 */
+.toc-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-sidebar li {
+    margin-bottom: 2px;
+}
+
+.toc-sidebar a {
+    text-decoration: none;
+    color: var(--fg-muted);
+    font-size: 0.8rem;
+    display: block;
+    padding: 5px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.toc-sidebar a:hover {
+    color: var(--accent-strong);
+    background: var(--accent-soft);
+    white-space: normal;
+    /* 悬停时展开文字 */
+}
+
+/* 二级标题缩进 */
+.toc-h3 {
+    margin-left: 8px;
+    border-left: 2px solid transparent;
+    opacity: 0.8;
+}

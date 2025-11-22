@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> 主题文件结构 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> 主题文件结构 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <h2>文件结构</h2>
+<p>你的主题应按照特定的目录结构组织，以确保 Allay 引擎能够正确定位并应用你的自定义样式。以下是主题文件所需的结构：</p>
+<pre><code>.
+├── allay.toml   # 可选的主题配置文件
+├── assets       # 存放图片、字体、CSS、JavaScript 等资源的目录
+├── i18n         # 存放本地化文件的目录
+├── pages        # 页面文件目录
+│   ├── 404.html        # 404 错误页模板
+│   ├── index.html      # 主页模板
+│   └── page.html       # 普通页面模板
+├── templates   # HTML 模板目录
+└── theme-meta.toml  # 主题元数据文件
+</code></pre>
+<p><code>allay.toml</code> 文件是可选的，但如果你希望为主题用户提供默认配置参数，建议添加。</p>
+<p><code>theme-meta.toml</code> 文件是必需的，它包含主题的元数据，使 Allay 引擎能够识别你的主题。以下是 <code>theme-meta.toml</code> 文件的示例：</p>
+<pre><code class="language-toml"># Allay 主题的 theme-meta 模板
+
+name = "Axolotl"
+license = "GPL-3.0-only"
+licenselink = "https://www.gnu.org/licenses/gpl-3.0-standalone.html"
+description = "Allay 官方主题"
+homepage = "https://github.com/PKUSoftwareEngineeringTeam/Axolotl"
+demosite = "https://github.com/PKUSoftwareEngineeringTeam/Axolotl-Wiki"
+
+tags = ["clean", "light", "personal"]
+min_version = "0.1.0"
+
+[author]
+name = "LeoDreamer"
+homepage = "https://leodreamer2004.github.io"
+</code></pre>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

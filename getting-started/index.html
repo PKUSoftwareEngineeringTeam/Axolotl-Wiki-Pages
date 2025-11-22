@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> 快速开始 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> 快速开始 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <p>欢迎使用 Allay 博客引擎！本指南将帮助你快速创建并运行你的第一个 Allay 博客。</p>
+<h2>安装 Allay</h2>
+<p>首先，你需要安装 Allay。你可以通过以下两种方式获取：</p>
+<ol>
+<li>
+<p><strong>下载预编译版本（推荐）</strong>：访问我们的 <a href="https://github.com/PKUSoftwareEngineeringTeam/Allay/releases">https://github.com/PKUSoftwareEngineeringTeam/Allay/releases</a> 获取最新的预编译二进制文件</p>
+</li>
+<li>
+<p><strong>从源码构建</strong>：</p>
+<pre><code class="language-sh"># 克隆仓库
+git clone https://github.com/PKUSoftwareEngineeringTeam/Allay
+
+# 构建项目
+cd Allay
+cargo build --release
+
+# 验证安装
+./target/release/allay --version
+</code></pre>
+</li>
+</ol>
+<p>建议将可执行文件添加到系统 PATH 中以便全局使用。</p>
+<h2>安装allay插件</h2>
+<p>如果你使用的是vscode编辑器，强烈建议安装allay插件以获得更好的编辑体验。请按照以下步骤操作：</p>
+<h3>（Todo）</h3>
+<h2>初始化</h2>
+<p>现在，在命令行新建一个文件夹存放你的博客，然后输入</p>
+<pre><code class="language-sh">allay new
+allay init
+</code></pre>
+<h2>博客目录结构</h2>
+<p>现在，你的 Allay 博客包含以下主要目录和文件：</p>
+<pre><code>.
+├── allay.toml      # 博客配置文件
+├── contents/         # Markdown 内容文件
+├── public/          # 生成的静态文件
+├── shortcodes/      # 自定义短代码
+├── static/          # 静态资源（图片、PDF等）
+└── themes/          # 主题目录
+</code></pre>
+<p>简单来说，<code>contents/</code> 目录用于存放你的博客内容，<code>static/</code> 目录用于存放静态资源（如图片），<code>themes/</code> 目录用于存放博客主题。更多详情请参见 <a href="./file-structure.md">文件结构</a>。</p>
+<h2>选择你的主题</h2>
+<p>allay支持用户创作自己的主题，同时也提供一套官方的主题以供选择。我们先从官方主题开始。</p>
+<pre><code class="language-sh">cd themes
+#  选择官方主题
+git clone https://github.com/PKUSoftwareEngineeringTeam/Axolotl.git
+</code></pre>
+<h2>启动本地服务器</h2>
+<p>好了，万事具备！让我们启动allay引擎！</p>
+<p>进入你的博客目录，运行以下命令启动本地开发服务器：</p>
+<pre><code class="language-sh">allay server
+</code></pre>
+<p>我们的本地服务器现已启动！</p>
+<hr />
+<p>这将：</p>
+<ul>
+<li>在 <code>public/</code> 目录生成静态文件</li>
+<li>启动本地服务器（默认地址：<code>http://localhost:8000</code>）</li>
+<li>自动检测 <code>content/</code> 目录的更改并实时更新</li>
+</ul>
+<p>如果端口 8000 已被占用，你可以通过配置指定其他端口。</p>
+<hr />
+<p>当然，如果你已经安装了vscode插件，你可以点击右上角的眼睛图标，直接在vscode中启动本地服务器，并预览博客效果。</p>
+<h2>开始创作</h2>
+<p>现在你可以：</p>
+<ol>
+<li>在 <code>content/</code> 目录中创建 Markdown 文件来编写博客内容</li>
+<li>将图片等静态资源放入 <code>static/</code> 目录</li>
+<li>通过修改 <code>allay.toml</code> 文件来自定义博客配置</li>
+<li>在浏览器/vscode中查看实时更新</li>
+</ol>
+<p>尽情享受你的博客创作之旅吧！</p>
+<h2>More....</h2>
+<p>如果你想要了解更多allay“隐藏”语法，请阅读<a href="../allay-template/index.html">allay模版</a></p>
+<p>如果你想要学习如何更好的创建和管理自定义内容，请阅读<a href="../custom-contents/index.html">自定义内容</a></p>
+<p>如果你是我们的高阶用户，想要创作自己的主题，请阅读<a href="../custom-themes/index.html">自定义主题</a></p>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

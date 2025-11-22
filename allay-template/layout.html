@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> 自定义布局模板 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> 自定义布局模板 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <h2>布局</h2>
+<p>所有的 Allay 模板都应放在 <code>templates</code> 目录下。你至少需要包含以下默认模板：</p>
+<ul>
+<li><code>page.html</code>：常规页面的默认模板。</li>
+</ul>
+<p>当 markdown--<a href="../custom-contents/front-matter.html">front matter</a> 中未指定 url 字段时，Allay 会使用 <code>page.html</code> 模板渲染页面。</p>
+<h3>自定义模板布局</h3>
+<p>并非所有页面都应使用相同的布局。你可以在 front matter 中通过 <code>template</code> 字段为每个页面指定不同的模板。例如：</p>
+<p><code>content/about/index.md</code>：</p>
+<pre><code class="language-md">---
+title: About Me
+template: about.html
+---
+
+Hello, this is the about page.
+</code></pre>
+<p><code>templates/about.html</code>：</p>
+<pre><code class="language-html">&lt;body&gt;
+    &lt;h1&gt;About Me&lt;/h1&gt;
+    &lt;p&gt;{: .content :}&lt;/p&gt;
+&lt;/body&gt;
+</code></pre>
+<p>这样，你可以为博客中的不同类型页面创建自定义布局。只需确保指定的模板文件存在于 <code>templates</code> 目录中即可。</p>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

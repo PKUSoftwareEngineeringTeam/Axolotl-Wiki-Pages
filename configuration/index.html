@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Allay 配置指南 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> Allay 配置指南 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <p>Allay 可以通过在站点根目录放置一个 <code>allay.toml</code> 文件进行配置。该文件允许你设置各种参数，以控制站点的行为和外观。</p>
+<p>配置文件是全局的，会影响整个站点。</p>
+<p>可用的配置选项包括：</p>
+<ul>
+<li><code>baseUrl</code>：你的网站的基础 URL。</li>
+<li><code>title</code>：你的网站标题。</li>
+<li><code>theme</code>：你的网站所使用的主题。</li>
+<li><code>params</code>：可在模板中访问的自定义参数表。</li>
+</ul>
+<p>默认的配置如下：</p>
+<pre><code class="language-sh"># Default Allay site configuration
+baseUrl = "http://axolotl.wiki"
+title = "Axolotl Wiki"
+theme = "Axolotl"
+description = "Official Axolotl Wiki"
+author = "Allay Developer"
+[params]
+title = "Allay Blog"
+</code></pre>
+<p>自定义的参数列表的变量名可以与[params]上面的重复。这些参数是你博客的全局参数。比如，你可以这样写：</p>
+<pre><code class="language-sh"># allay.toml
+...(默认配置)
+author = 张三
+</code></pre>
+<pre><code class="language-sh"># 自我介绍.md
+我的名字叫{:site.title:},...
+</code></pre>
+<p>这样，一些你经常用到的数据就可以存储在配置文件中。</p>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

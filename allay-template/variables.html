@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Allay 模板变量 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> Allay 模板变量 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <h2>类型</h2>
+<p>Allay 模板中的所有变量类型包括：</p>
+<p>| 类型    | 描述                                           | 示例                        |
+|---------|------------------------------------------------|-----------------------------|
+| 字符串  | 一串字符。                                     | <code>"Hello, World!"</code>           |
+| 整数    | 一个整数。                                     | <code>42</code>                        |
+| 布尔值  | 真或假的值。                                   | <code>true</code> 或 <code>false</code>           |
+| 数组    | 有序的值列表。                                 | <code>[1, 2, 3]</code>                 |
+| 映射    | 键值对的集合。                                 | <code>{"key": "value"}</code>          |</p>
+<h2>预设变量</h2>
+<p>当前作用域的变量可以通过 <code>this</code> 访问，通常可以省略。</p>
+<p>全局作用域的变量可以通过 <code>site</code> 访问。</p>
+<h2>自定义变量</h2>
+<p>Allay 模板中的所有变量应以 <code>$</code> 开头。定义变量的语法如下：</p>
+<pre><code class="language-html">{- set $my_variable = "Hello, World" -}
+&lt;p&gt;{: $my_variable :}&lt;/p&gt;
+</code></pre>
+<p><code>set</code> 指令用于为变量赋值，<code>:</code> 语法用于输出变量的值。上述示例的输出为：</p>
+<pre><code class="language-html">&lt;p&gt;Hello, World&lt;/p&gt;
+</code></pre>
+<h2>访问对象字段</h2>
+<p>可以使用 <code>.</code> 符号访问对象的字段。例如，当前作用域变量为：</p>
+<pre><code class="language-json">{
+    "name": "Alice",
+    "age": 30,
+    "address": {
+        "city": "Wonderland",
+        "zip": "12345"
+    }
+}
+</code></pre>
+<p>在模板中：</p>
+<pre><code class="language-html">&lt;p&gt;{: this.name :}&lt;/p&gt;       &lt;!-- 输出 "Alice" --&gt;
+&lt;p&gt;{: .name :}&lt;/p&gt;           &lt;!-- 省略 "this"，输出 "Alice" --&gt;
+&lt;p&gt;{: .address.city :}&lt;/p&gt;   &lt;!-- 输出 "Wonderland" --&gt;
+{- set $addr = .address -}
+&lt;p&gt;{: $addr.zip :}&lt;/p&gt;       &lt;!-- 输出 "12345" --&gt;
+</code></pre>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

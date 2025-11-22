@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> 额外功能——短代码 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> 额外功能——短代码 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <p>短代码是 Allay 的一个强大功能，允许你在 Markdown 文件中嵌入动态内容。它类似于编程语言中的宏或函数，可以复用代码片段，并通过传递参数来自定义行为。</p>
+<h2>定义</h2>
+<p>所有短代码应定义在 <code>shortcodes</code> 目录下。每个短代码会绑定到同名的 HTML/Markdown 文件。你可以通过以下语法在 Markdown 文件中使用这些短代码：</p>
+<pre><code>{&lt; shortcode_name params... &gt;}
+</code></pre>
+<h2>示例</h2>
+<h3>自闭合短代码</h3>
+<p><code>shortcodes/note.md</code>：</p>
+<pre><code class="language-md">![Note](https://img.shields.io/badge/Note-Important-brightgreen)
+</code></pre>
+<p>在你的 Markdown 中：</p>
+<pre><code class="language-md">这里是一个提示徽章：{&lt; note /&gt;}
+</code></pre>
+<h3>块级短代码</h3>
+<p><code>shortcodes/closure.html</code>：</p>
+<pre><code class="language-html">&lt;div class="closure"&gt;{: .inner :}&lt;/div&gt;
+</code></pre>
+<p>在你的 Markdown 中：</p>
+<pre><code class="language-md">{&lt; closure &gt;}
+这里是一些重要内容。
+{&lt;/ closure &gt;}
+</code></pre>
+<p>内部内容会被放置在模板中的 <code>{: .inner :}</code> 位置。</p>
+<h3>带参数的短代码</h3>
+<p><code>shortcodes/say.html</code>：</p>
+<pre><code class="language-html">&lt;div class="say"&gt;{- param.0 -}&lt;/div&gt;
+</code></pre>
+<p>在你的 Markdown 中：</p>
+<pre><code class="language-md">{&lt; say "Hello, World!" &gt;}
+</code></pre>
+<h2>递归短代码模板</h2>
+<p><code>shortcodes/warning.html</code>：</p>
+<pre><code class="language-html">&lt;div class="warning"&gt;
+    {- include "warning-badge" -}
+    &lt;div class="content"&gt;{: .inner :}&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p><code>shortcodes/warning-badge.md</code>：</p>
+<pre><code class="language-md">![Warning](https://img.shields.io/badge/Warning-Important-red)
+</code></pre>
+<p>在你的 Markdown 中：</p>
+<pre><code class="language-md">{&lt; warning &gt;}
+这是一个警告信息。
+{&lt;/ warning &gt;}
+</code></pre>
+<blockquote>
+<p>短代码实际上是包含模板的语法糖。<code>{&lt; note "Hello!" /&gt;}</code> 等价于 <code>{- include "note" this "Hello" -}</code>。你也可以直接使用 <code>include</code>。</p>
+</blockquote>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>

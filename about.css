@@ -1,0 +1,56 @@
+.friends-section {
+    margin: 20px 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.friends-title {
+    color: #333;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.friends-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.friend-block {
+    display: block;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.friend-block:hover {
+    background-color: #f0f8ff;
+    border-color: #4dabf7;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.friend-link {
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #1971c2;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.friend-link:hover {
+    color: #1864ab;
+}
+
+.friend-intro {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.4;
+}

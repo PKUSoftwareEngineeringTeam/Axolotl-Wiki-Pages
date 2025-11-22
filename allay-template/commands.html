@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Allay 模板引擎用户指南 </title>
+    <link rel="stylesheet" href="/style_official.css" />
+</head> 
+<head>
+  <link rel="stylesheet" href="/toc.css" />
+</head>
+<body>
+  <header class="header">
+    <nav class="nav container">
+        <a href="/" class="nav-brand">
+            <span class="axolotl-gradient"> Axolotl Wiki </span>
+        </a>
+
+        <ul class="nav-menu">
+            <li><a href="/" class="nav-link">首页</a></li>
+            <li><a href="/blog.html" class="nav-link">博客</a></li>
+            <li><a href="/about.html" class="nav-link">关于</a></li>
+            <li><a href="/contact.html" class="nav-link">联系</a></li>
+        </ul>
+
+        
+    </nav>
+</header> 
+
+  <main class="main">
+    <div class="container">
+      <article class="article fade-in">
+        <header class="article-header">
+ 
+          <h1 class="article-title"> Allay 模板引擎用户指南 </h1>
+ 
+
+ 
+        </header>
+
+        <div class="article-content">
+ <h2>基本语法</h2>
+<p>在 Allay 模板中，使用以下标记：</p>
+<ul>
+<li><code>{- -}</code>：命令块，用于控制流程</li>
+<li><code>{: :}</code>：表达式块，用于输出内容</li>
+<li><code>{&lt; &gt;}</code>：短代码块，用于扩展功能</li>
+<li><code>{{ }}</code>：不转义文本块，用于原样输出</li>
+</ul>
+<p>所有表达式块都会被求值并替换为其结果。</p>
+<h2>变量和表达式</h2>
+<h3>变量定义和使用</h3>
+<pre><code class="language-html">{- set $name = "Allay" -}
+{- set $count = 10 -}
+{: $name :} &lt;!-- 输出: Allay --&gt;
+{: $count + 5 :} &lt;!-- 输出: 15 --&gt;
+</code></pre>
+<h3>字段访问</h3>
+<pre><code class="language-html">{- set $user = .current_user -}
+{: $user.name :}        &lt;!-- 访问 name 字段 --&gt;
+{: $user.profile.age :} &lt;!-- 嵌套字段访问 --&gt;
+{: .title :}            &lt;!-- 访问当前作用域的 title 字段 --&gt;
+</code></pre>
+<h3>表达式支持</h3>
+<p>Allay 支持丰富的表达式：</p>
+<pre><code class="language-html">&lt;!-- 算术运算 --&gt;
+{: 10 + 5 :}     &lt;!-- 15 --&gt;
+{: $price * 1.1 :} &lt;!-- 价格加 10% --&gt;
+
+&lt;!-- 比较运算 --&gt;
+{- if $score &gt;= 60 -}及格{- end -}
+{- if $name == "admin" -}管理员{- end -}
+
+&lt;!-- 逻辑运算 --&gt;
+{- if $logged_in &amp;&amp; $is_admin -}欢迎管理员{- end -}
+{- if !$visible -}隐藏内容{- end -}
+
+&lt;!-- 字符串操作 --&gt;
+{: "Hello " + $name + "!" :}
+</code></pre>
+<h2>控制流程命令</h2>
+<h3><code>set</code> - 变量赋值</h3>
+<p>在当前作用域创建或修改变量。</p>
+<pre><code class="language-html">{- set $title = .page_title -}
+{- set $count = $count + 1 -}
+{- set $full_name = $first_name + " " + $last_name -}
+&lt;h1&gt;{: $title :}&lt;/h1&gt;
+</code></pre>
+<h3><code>for</code> - 循环遍历</h3>
+<p>遍历列表或集合，支持索引变量。</p>
+<pre><code class="language-html">&lt;!-- 基本遍历 --&gt;
+&lt;ul&gt;
+    {- for $item: .products -}
+    &lt;li&gt;{: $item.name :} - ${: $item.price :}&lt;/li&gt;
+    {- end -}
+&lt;/ul&gt;
+
+&lt;!-- 带索引的遍历 --&gt;
+&lt;ol&gt;
+    {- for $product, $index: .products -}
+    &lt;li&gt;{: $index + 1 :}. {: $product.name :}&lt;/li&gt;
+    {- end -}
+&lt;/ol&gt;
+
+&lt;!-- 遍历对象字段 --&gt;
+{- for $key, $value: .settings -}
+&lt;p&gt;{: $key :}: {: $value :}&lt;/p&gt;
+{- end -}
+</code></pre>
+<h3><code>if</code> / <code>else</code> - 条件判断</h3>
+<p>根据条件渲染不同内容。</p>
+<pre><code class="language-html">&lt;!-- 简单条件 --&gt;
+{- if .user.is_admin -}
+&lt;button&gt;管理面板&lt;/button&gt;
+{- end -}
+
+&lt;!-- 条件分支 --&gt;
+{- if .score &gt;= 90 -}
+&lt;p&gt;优秀&lt;/p&gt;
+{- else if .score &gt;= 60 -}
+&lt;p&gt;及格&lt;/p&gt;
+{- else -}
+&lt;p&gt;不及格&lt;/p&gt;
+{- end -}
+
+&lt;!-- 复杂条件 --&gt;
+{- if .user.logged_in &amp;&amp; (.user.role == "admin" || .user.role == "editor") -}
+&lt;p&gt;欢迎，{: .user.name :}&lt;/p&gt;
+{- end -}
+</code></pre>
+<h3><code>with</code> - 作用域切换</h3>
+<p>进入对象的作用域，简化字段访问。</p>
+<pre><code class="language-html">&lt;!-- 不使用 with --&gt;
+{: .article.author.name :}
+{: .article.author.email :}
+
+&lt;!-- 使用 with 简化 --&gt;
+{- with .article.author -}
+&lt;p&gt;作者: {: .name :}&lt;/p&gt;
+&lt;p&gt;邮箱: {: .email :}&lt;/p&gt;
+{- end -}
+
+&lt;!-- 安全使用（对象可能为空） --&gt;
+{- with .optional_content || {} -}
+&lt;div&gt;{: .text :}&lt;/div&gt;
+{- end -}
+</code></pre>
+<h2>模板组织和复用</h2>
+<h3><code>include</code> - 模板包含</h3>
+<p>包含其他模板文件，支持参数传递。</p>
+<pre><code class="language-html">&lt;!-- 包含头部模板，使用当前作用域 --&gt;
+{- include "header.html" -}
+
+&lt;!-- 包含文章模板，传递特定作用域和参数 --&gt;
+{- include "components/article.html" .current_article "特色文章" -}
+
+&lt;!-- 包含侧边栏，不传递作用域（使用当前作用域） --&gt;
+{- include "sidebar.html" -}
+</code></pre>
+<p>在被包含的模板中，使用 <code>param</code> 访问传递的参数：</p>
+<pre><code class="language-html">&lt;!-- components/article.html --&gt;
+&lt;article class="article"&gt;
+    &lt;h2&gt;{: .title :}&lt;/h2&gt;
+    &lt;div class="meta"&gt;{: param.0 :}&lt;/div&gt; &lt;!-- 显示 "特色文章" --&gt;
+    &lt;div class="content"&gt;{: .content :}&lt;/div&gt;
+&lt;/article&gt;
+</code></pre>
+<h3>短代码系统</h3>
+<p>短代码用于扩展模板功能，支持单标签和块级用法。</p>
+<pre><code class="language-html">&lt;!-- 单标签短代码 --&gt;
+{&lt; image src="photo.jpg" alt="描述" /&gt;}
+
+&lt;!-- 块级短代码 --&gt;
+{&lt; panel title="提示" &gt;}
+这是一个重要的提示信息。
+{&lt;/ panel &gt;}
+
+&lt;!-- 带参数的短代码 --&gt;
+{&lt; embed url=$video_url autoplay=true /&gt;}
+</code></pre>
+<h2>特殊变量和作用域</h2>
+<h3>内置变量</h3>
+<pre><code class="language-html">{: this :}        &lt;!-- 当前作用域对象 --&gt;
+{: site.title :}  &lt;!-- 站点全局变量 --&gt;
+{: pages :}       &lt;!-- 页面集合 --&gt;
+{: param.0 :}     &lt;!-- 第一个参数 --&gt;
+{: param.1 :}     &lt;!-- 第二个参数 --&gt;
+</code></pre>
+<h3>作用域规则</h3>
+<pre><code class="language-html">&lt;!-- 全局作用域 --&gt;
+{- set $global_var = "可在任何地方访问" -}
+
+&lt;!-- 循环内的作用域 --&gt;
+{- for $item: .items -}
+    {- set $local_var = "只在循环内有效" -}
+    {: $local_var :} &lt;!-- 正常 --&gt;
+{- end -}
+{: $local_var :} &lt;!-- 错误，变量不存在 --&gt;
+
+&lt;!-- with 块内的修改 --&gt;
+{- with .user -}
+    {- set $temp = .name -} &lt;!-- 不影响原对象 --&gt;
+{- end -}
+</code></pre>
+<h2>实用技巧和最佳实践</h2>
+<h3>1. 安全访问嵌套字段</h3>
+<pre><code class="language-html">&lt;!-- 安全的方式访问可能不存在的字段 --&gt;
+{- with .user || {} -}
+{: .profile?.avatar || "default.jpg" :}
+{- end -}
+</code></pre>
+<h3>2. 使用默认值</h3>
+<pre><code class="language-html">{: $username || "匿名用户" :}
+{: .description || "暂无描述" :}
+</code></pre>
+<h3>3. 条件包含模板</h3>
+<pre><code class="language-html">{- if .show_sidebar -}
+{- include "sidebar.html" -}
+{- end -}
+</code></pre>
+<h3>4. 循环中的状态判断</h3>
+<pre><code class="language-html">{- for $item, $index: .items -}
+{- if $index == 0 -}
+&lt;li class="first"&gt;{: $item :}&lt;/li&gt;
+{- else if $index == count(.items) - 1 -}
+&lt;li class="last"&gt;{: $item :}&lt;/li&gt;
+{- else -}
+&lt;li&gt;{: $item :}&lt;/li&gt;
+{- end -}
+{- end -}
+</code></pre>
+<h3>5. 模板注释</h3>
+<pre><code class="language-html">{- 这是单行注释 -}
+
+{-
+  这是多行注释
+  不会在最终输出中显示
+-}
+</code></pre>
+<h2>错误处理</h2>
+<h3>常见错误及解决</h3>
+<pre><code class="language-html">&lt;!-- 错误：变量不存在 --&gt;
+{: $undefined_var :} &lt;!-- 会抛出错误 --&gt;
+
+&lt;!-- 正确：使用默认值 --&gt;
+{: $undefined_var || "默认值" :}
+
+&lt;!-- 错误：除零 --&gt;
+{: 10 / 0 :} &lt;!-- 会抛出错误 --&gt;
+
+&lt;!-- 正确：安全检查 --&gt;
+{- if $divisor != 0 -}{: 10 / $divisor :}{- end -}
+</code></pre>
+<p>如果你想要更详细的说明，以下是博客引擎支持的所有语法规则的参考表格：</p>
+<h2>基本语法结构</h2>
+<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
+|---------|---------|---------|------|------|
+| <strong>文件结构</strong> | 文件 | <code>SOI ~ (yaml_front_matter \| toml_front_matter)? ~ template ~ EOI</code> | 完整文件结构，包含可选的元数据和模板内容 | - |
+| <strong>元数据</strong> | YAML 前置元数据 | <code>---\n</code> + 内容 + <code>---\n</code> | 使用 YAML 格式的元数据块 | <code>---\ntitle: 示例\n---</code> |
+| | TOML 前置元数据 | <code>+++\n</code> + 内容 + <code>+++\n</code> | 使用 TOML 格式的元数据块 | <code>+++\ntitle = "示例"\n+++</code> |</p>
+<h2>模板控制结构</h2>
+<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
+|---------|---------|---------|------|------|
+| <strong>文本处理</strong> | 普通文本 | <code>(!("{-" \| "{&lt;" \| "{:" \| "{{") ~ ANY)+</code> | 普通文本内容，不包含特殊语法 | <code>这是一段普通文本</code> |
+| | 不转义文本 | <code>{{</code> + 内容 + <code>}}</code> | 原样输出内容，不进行转义 | <code>{{&lt;html&gt;}}</code> 输出 <code>&lt;html&gt;</code> |
+| <strong>变量和表达式</strong> | 变量 | <code>$</code> + 标识符 | 变量引用 | <code>$title</code> |
+| | 字段访问 | 顶级对象 + <code>.</code> + 字段 | 访问对象的字段 | <code>$user.name</code> |
+| | 字符串 | <code>"</code> + 内容 + <code>"</code> | 字符串字面量 | <code>"Hello World"</code> |
+| | 布尔值 | <code>#t</code> 或 <code>#f</code> | 布尔值字面量 | <code>#t</code> (true), <code>#f</code> (false) |
+| | 空值 | <code>null</code> | 空值字面量 | <code>null</code> |
+| | 数字 | 数字序列 | 数字字面量 | <code>123</code>, <code>45.67</code> |</p>
+<h2>控制命令</h2>
+<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
+|---------|---------|---------|------|------|
+| <strong>变量设置</strong> | set 命令 | <code>{- set 变量 = 表达式 -}</code> | 设置变量值 | <code>{- set $name = "John" -}</code> |
+| <strong>循环控制</strong> | for 循环 | <code>{- for 变量[,变量] : 表达式 -}</code> + 内容 + <code>{- end -}</code> | 遍历集合 | <code>{- for $item : $list -}{$item}{- end -}</code> |
+| <strong>条件控制</strong> | if 条件 | <code>{- if 表达式 -}</code> + 内容 + (<code>{- else -}</code> + 内容)? + <code>{- end -}</code> | 条件判断 | <code>{- if $show -}显示内容{- end -}</code> |
+| <strong>作用域控制</strong> | with 块 | <code>{- with 表达式 -}</code> + 内容 + <code>{- end -}</code> | 创建新的作用域 | <code>{- with $user -}{.name}{- end -}</code> |
+| <strong>文件包含</strong> | include 命令 | <code>{- include "文件名" 参数... -}</code> | 包含其他模板文件 | <code>{- include "header.html" -}</code> |</p>
+<h2>短代码系统</h2>
+<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
+|---------|---------|---------|------|------|
+| <strong>短代码</strong> | 单标签短代码 | <code>{&lt; 名称 参数... /&gt;}</code> | 自闭合的短代码 | <code>{&lt; image src="pic.jpg" /&gt;}</code> |
+| | 块级短代码 | <code>{&lt; 名称 参数... &gt;}</code> + 内容 + <code>{&lt;/ 名称 &gt;}</code> | 包含内容的短代码 | <code>{&lt; panel &gt;}内容{&lt;/ panel &gt;}</code> |</p>
+<h2>内容替换</h2>
+<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
+|---------|---------|---------|------|------|
+| <strong>内容替换</strong> | 表达式替换 | <code>{:</code> + 表达式 + <code>:}</code> | 计算并输出表达式结果 | <code>{:$a + $b:}</code> |
+| | get 替换 | <code>{:</code> + <code>get</code> + 表达式 + <code>:}</code> | 显式获取并输出值 | <code>{:$user.name:}</code> |</p>
+<h2>操作符</h2>
+<p>| 操作符类型 | 操作符 | 描述 | 优先级 |
+|----------|--------|------|--------|
+| <strong>逻辑操作符</strong> | <code>&amp;&amp;</code> | 逻辑与 | 低 |
+| | <code>\|\|</code> | 逻辑或 | 低 |
+| <strong>比较操作符</strong> | <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> | 比较运算 | 中 |
+| <strong>算术操作符</strong> | <code>+</code>, <code>-</code> | 加减法 | 中 |
+| | <code>*</code>, <code>/</code>, <code>%</code> | 乘除取模 | 高 |
+| <strong>一元操作符</strong> | <code>!</code>, <code>+</code>, <code>-</code> | 逻辑非、正负号 | 最高 |</p>
+<h2>特殊关键字</h2>
+<p>| 关键字 | 描述 |
+|--------|------|
+| <code>this</code> | 引用当前上下文对象 |
+| <code>param</code> | 引用模板参数 |
+| <code>site</code> | 引用站点全局变量 |
+| <code>pages</code> | 引用页面集合 |</p>
+ 
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+        <span>© Axolotl Wiki </span>
+        <span>由 Allay & Axolotl 主题驱动</span>
+    </div>
+</footer>
+
+<script src="/script.js"></script> 
+  <script src="/toc.js"></script>
+</body>
+
+<script>
+    
+</script>
+
+</html>
