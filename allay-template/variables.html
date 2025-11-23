@@ -48,13 +48,13 @@
         <div class="article-content">
  <h2>类型</h2>
 <p>Allay 模板中的所有变量类型包括：</p>
-<p>| 类型    | 描述                                           | 示例                        |
-|---------|------------------------------------------------|-----------------------------|
-| 字符串  | 一串字符。                                     | <code>"Hello, World!"</code>           |
-| 整数    | 一个整数。                                     | <code>42</code>                        |
-| 布尔值  | 真或假的值。                                   | <code>true</code> 或 <code>false</code>           |
-| 数组    | 有序的值列表。                                 | <code>[1, 2, 3]</code>                 |
-| 映射    | 键值对的集合。                                 | <code>{"key": "value"}</code>          |</p>
+<table><thead><tr><th>类型</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td>字符串</td><td>一串字符。</td><td><code>"Hello, World!"</code></td></tr>
+<tr><td>整数</td><td>一个整数。</td><td><code>42</code></td></tr>
+<tr><td>布尔值</td><td>真或假的值。</td><td><code>true</code> 或 <code>false</code></td></tr>
+<tr><td>数组</td><td>有序的值列表。</td><td><code>[1, 2, 3]</code></td></tr>
+<tr><td>映射</td><td>键值对的集合。</td><td><code>{"key": "value"}</code></td></tr>
+</tbody></table>
 <h2>预设变量</h2>
 <p>当前作用域的变量可以通过 <code>this</code> 访问，通常可以省略。</p>
 <p>全局作用域的变量可以通过 <code>site</code> 访问。</p>
@@ -87,7 +87,47 @@
  
         </div>
       </article>
-    </div>
+
+  
+ 
+
+<div id="gitalk-container"></div>
+
+<div 
+data-client-id=" Ov23livxBGg30QbIUQse "
+data-client-secret=" a0f8e2c1678f075a9c1519e4b4f970356dd55c6c "
+data-repo=" Axolotl-Wiki "
+data-owner=" PKUSoftwareEngineeringTeam "
+data-admin=" LeoDreamer2004 " 
+ data-title=" Axolotl Wiki Feedback "  
+ data-language=" zh-CN "  
+id="gitalk-data">
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalkData = document.getElementById('gitalk-data');
+    var gitalk = new Gitalk({
+        clientID: gitalkData.getAttribute('data-client-id').trim(),
+        clientSecret: gitalkData.getAttribute('data-client-secret').trim(),
+        repo: gitalkData.getAttribute('data-repo').trim(),
+        owner: gitalkData.getAttribute('data-owner').trim(),
+        admin: [gitalkData.getAttribute('data-admin').trim()],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false,  // Facebook-like distraction
+        title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
+        language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
+    });
+
+    console.log("Gitalk initialized:", gitalk);
+
+    gitalk.render('gitalk-container')
+</script>
+
+ 
+ 
+     </div>
   </main>
 
   <footer class="site-footer">

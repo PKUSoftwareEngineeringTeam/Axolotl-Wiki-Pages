@@ -65,20 +65,60 @@ tags = ["介绍", "欢迎"]
 </code></pre>
 <h3>默认元数据字段</h3>
 <p>以下是 Allay 支持的默认元数据字段，均为可选：</p>
-<p>| 字段         | 类型     | 说明                                              |
-|--------------|----------|---------------------------------------------------|
-| <code>head</code>       | 字符串   | 此<strong>网页</strong>的标题（不是文章标题）。                 |
-| <code>template</code>   | 字符串   | 指定使用的<a href="../allay-template/layout.html">布局模板</a>。|
-| <code>title</code>      | 字符串   | 页面标题，通常显示在页面内容的顶部。                |
-| <code>date</code>       | 日期     | 页面发布日期，通常格式如 "2024-01-01"。            |
-| <code>description</code>| 字符串   | 页面描述，通常用于 SEO 和摘要。                    |
-| <code>tags</code>       | 列表     | 页面标签列表，用于分类和组织内容。                |
-| <code>url</code>        | 字符串   | 页面自定义 URL。如果未指定，则根据文件路径生成。    |</p>
+<table><thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody>
+<tr><td><code>head</code></td><td>字符串</td><td>此<strong>网页</strong>的标题（不是文章标题）。</td></tr>
+<tr><td><code>template</code></td><td>字符串</td><td>指定使用的<a href="../allay-template/layout.html">布局模板</a>。</td></tr>
+<tr><td><code>title</code></td><td>字符串</td><td>页面标题，通常显示在页面内容的顶部。</td></tr>
+<tr><td><code>date</code></td><td>日期</td><td>页面发布日期，通常格式如 "2024-01-01"。</td></tr>
+<tr><td><code>description</code></td><td>字符串</td><td>页面描述，通常用于 SEO 和摘要。</td></tr>
+<tr><td><code>tags</code></td><td>列表</td><td>页面标签列表，用于分类和组织内容。</td></tr>
+<tr><td><code>url</code></td><td>字符串</td><td>页面自定义 URL。如果未指定，则根据文件路径生成。</td></tr>
+</tbody></table>
 <p>注意：<code>title</code>、<code>description</code> 和 <code>tags</code> 等字段通常在你的 <strong>主题模板</strong> 中使用，而不是 <strong>博客</strong> 本身。</p>
  
         </div>
       </article>
-    </div>
+
+  
+ 
+
+<div id="gitalk-container"></div>
+
+<div 
+data-client-id=" Ov23livxBGg30QbIUQse "
+data-client-secret=" a0f8e2c1678f075a9c1519e4b4f970356dd55c6c "
+data-repo=" Axolotl-Wiki "
+data-owner=" PKUSoftwareEngineeringTeam "
+data-admin=" LeoDreamer2004 " 
+ data-title=" Axolotl Wiki Feedback "  
+ data-language=" zh-CN "  
+id="gitalk-data">
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalkData = document.getElementById('gitalk-data');
+    var gitalk = new Gitalk({
+        clientID: gitalkData.getAttribute('data-client-id').trim(),
+        clientSecret: gitalkData.getAttribute('data-client-secret').trim(),
+        repo: gitalkData.getAttribute('data-repo').trim(),
+        owner: gitalkData.getAttribute('data-owner').trim(),
+        admin: [gitalkData.getAttribute('data-admin').trim()],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false,  // Facebook-like distraction
+        title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
+        language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
+    });
+
+    console.log("Gitalk initialized:", gitalk);
+
+    gitalk.render('gitalk-container')
+</script>
+
+ 
+ 
+     </div>
   </main>
 
   <footer class="site-footer">

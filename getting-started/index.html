@@ -99,15 +99,6 @@ git clone https://github.com/PKUSoftwareEngineeringTeam/Axolotl.git
 <pre><code class="language-sh">allay server
 </code></pre>
 <p>我们的本地服务器现已启动！</p>
-<hr />
-<p>这将：</p>
-<ul>
-<li>在 <code>public/</code> 目录生成静态文件</li>
-<li>启动本地服务器（默认地址：<code>http://localhost:8000</code>）</li>
-<li>自动检测 <code>content/</code> 目录的更改并实时更新</li>
-</ul>
-<p>如果端口 8000 已被占用，你可以通过配置指定其他端口。</p>
-<hr />
 <p>当然，如果你已经安装了vscode插件，你可以点击右上角的眼睛图标，直接在vscode中启动本地服务器，并预览博客效果。</p>
 <h2>开始创作</h2>
 <p>现在你可以：</p>
@@ -125,7 +116,47 @@ git clone https://github.com/PKUSoftwareEngineeringTeam/Axolotl.git
  
         </div>
       </article>
-    </div>
+
+  
+ 
+
+<div id="gitalk-container"></div>
+
+<div 
+data-client-id=" Ov23livxBGg30QbIUQse "
+data-client-secret=" a0f8e2c1678f075a9c1519e4b4f970356dd55c6c "
+data-repo=" Axolotl-Wiki "
+data-owner=" PKUSoftwareEngineeringTeam "
+data-admin=" LeoDreamer2004 " 
+ data-title=" Axolotl Wiki Feedback "  
+ data-language=" zh-CN "  
+id="gitalk-data">
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalkData = document.getElementById('gitalk-data');
+    var gitalk = new Gitalk({
+        clientID: gitalkData.getAttribute('data-client-id').trim(),
+        clientSecret: gitalkData.getAttribute('data-client-secret').trim(),
+        repo: gitalkData.getAttribute('data-repo').trim(),
+        owner: gitalkData.getAttribute('data-owner').trim(),
+        admin: [gitalkData.getAttribute('data-admin').trim()],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false,  // Facebook-like distraction
+        title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
+        language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
+    });
+
+    console.log("Gitalk initialized:", gitalk);
+
+    gitalk.render('gitalk-container')
+</script>
+
+ 
+ 
+     </div>
   </main>
 
   <footer class="site-footer">

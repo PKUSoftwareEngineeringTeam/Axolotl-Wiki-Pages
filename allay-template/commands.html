@@ -260,60 +260,100 @@
 </code></pre>
 <p>如果你想要更详细的说明，以下是博客引擎支持的所有语法规则的参考表格：</p>
 <h2>基本语法结构</h2>
-<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
-|---------|---------|---------|------|------|
-| <strong>文件结构</strong> | 文件 | <code>SOI ~ (yaml_front_matter \| toml_front_matter)? ~ template ~ EOI</code> | 完整文件结构，包含可选的元数据和模板内容 | - |
-| <strong>元数据</strong> | YAML 前置元数据 | <code>---\n</code> + 内容 + <code>---\n</code> | 使用 YAML 格式的元数据块 | <code>---\ntitle: 示例\n---</code> |
-| | TOML 前置元数据 | <code>+++\n</code> + 内容 + <code>+++\n</code> | 使用 TOML 格式的元数据块 | <code>+++\ntitle = "示例"\n+++</code> |</p>
+<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>文件结构</strong></td><td>文件</td><td><code>SOI ~ (yaml_front_matter | toml_front_matter)? ~ template ~ EOI</code></td><td>完整文件结构，包含可选的元数据和模板内容</td><td>-</td></tr>
+<tr><td><strong>元数据</strong></td><td>YAML 前置元数据</td><td><code>---\n</code> + 内容 + <code>---\n</code></td><td>使用 YAML 格式的元数据块</td><td><code>---\ntitle: 示例\n---</code></td></tr>
+<tr><td></td><td>TOML 前置元数据</td><td><code>+++\n</code> + 内容 + <code>+++\n</code></td><td>使用 TOML 格式的元数据块</td><td><code>+++\ntitle = "示例"\n+++</code></td></tr>
+</tbody></table>
 <h2>模板控制结构</h2>
-<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
-|---------|---------|---------|------|------|
-| <strong>文本处理</strong> | 普通文本 | <code>(!("{-" \| "{&lt;" \| "{:" \| "{{") ~ ANY)+</code> | 普通文本内容，不包含特殊语法 | <code>这是一段普通文本</code> |
-| | 不转义文本 | <code>{{</code> + 内容 + <code>}}</code> | 原样输出内容，不进行转义 | <code>{{&lt;html&gt;}}</code> 输出 <code>&lt;html&gt;</code> |
-| <strong>变量和表达式</strong> | 变量 | <code>$</code> + 标识符 | 变量引用 | <code>$title</code> |
-| | 字段访问 | 顶级对象 + <code>.</code> + 字段 | 访问对象的字段 | <code>$user.name</code> |
-| | 字符串 | <code>"</code> + 内容 + <code>"</code> | 字符串字面量 | <code>"Hello World"</code> |
-| | 布尔值 | <code>#t</code> 或 <code>#f</code> | 布尔值字面量 | <code>#t</code> (true), <code>#f</code> (false) |
-| | 空值 | <code>null</code> | 空值字面量 | <code>null</code> |
-| | 数字 | 数字序列 | 数字字面量 | <code>123</code>, <code>45.67</code> |</p>
+<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>文本处理</strong></td><td>普通文本</td><td><code>(!("{-" | "{&lt;" | "{:" | "{{") ~ ANY)+</code></td><td>普通文本内容，不包含特殊语法</td><td><code>这是一段普通文本</code></td></tr>
+<tr><td></td><td>不转义文本</td><td><code>{{</code> + 内容 + <code>}}</code></td><td>原样输出内容，不进行转义</td><td><code>{{&lt;html&gt;}}</code> 输出 <code>&lt;html&gt;</code></td></tr>
+<tr><td><strong>变量和表达式</strong></td><td>变量</td><td><code>$</code> + 标识符</td><td>变量引用</td><td><code>$title</code></td></tr>
+<tr><td></td><td>字段访问</td><td>顶级对象 + <code>.</code> + 字段</td><td>访问对象的字段</td><td><code>$user.name</code></td></tr>
+<tr><td></td><td>字符串</td><td><code>"</code> + 内容 + <code>"</code></td><td>字符串字面量</td><td><code>"Hello World"</code></td></tr>
+<tr><td></td><td>布尔值</td><td><code>#t</code> 或 <code>#f</code></td><td>布尔值字面量</td><td><code>#t</code> (true), <code>#f</code> (false)</td></tr>
+<tr><td></td><td>空值</td><td><code>null</code></td><td>空值字面量</td><td><code>null</code></td></tr>
+<tr><td></td><td>数字</td><td>数字序列</td><td>数字字面量</td><td><code>123</code>, <code>45.67</code></td></tr>
+</tbody></table>
 <h2>控制命令</h2>
-<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
-|---------|---------|---------|------|------|
-| <strong>变量设置</strong> | set 命令 | <code>{- set 变量 = 表达式 -}</code> | 设置变量值 | <code>{- set $name = "John" -}</code> |
-| <strong>循环控制</strong> | for 循环 | <code>{- for 变量[,变量] : 表达式 -}</code> + 内容 + <code>{- end -}</code> | 遍历集合 | <code>{- for $item : $list -}{$item}{- end -}</code> |
-| <strong>条件控制</strong> | if 条件 | <code>{- if 表达式 -}</code> + 内容 + (<code>{- else -}</code> + 内容)? + <code>{- end -}</code> | 条件判断 | <code>{- if $show -}显示内容{- end -}</code> |
-| <strong>作用域控制</strong> | with 块 | <code>{- with 表达式 -}</code> + 内容 + <code>{- end -}</code> | 创建新的作用域 | <code>{- with $user -}{.name}{- end -}</code> |
-| <strong>文件包含</strong> | include 命令 | <code>{- include "文件名" 参数... -}</code> | 包含其他模板文件 | <code>{- include "header.html" -}</code> |</p>
+<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>变量设置</strong></td><td>set 命令</td><td><code>{- set 变量 = 表达式 -}</code></td><td>设置变量值</td><td><code>{- set $name = "John" -}</code></td></tr>
+<tr><td><strong>循环控制</strong></td><td>for 循环</td><td><code>{- for 变量[,变量] : 表达式 -}</code> + 内容 + <code>{- end -}</code></td><td>遍历集合</td><td><code>{- for $item : $list -}{$item}{- end -}</code></td></tr>
+<tr><td><strong>条件控制</strong></td><td>if 条件</td><td><code>{- if 表达式 -}</code> + 内容 + (<code>{- else -}</code> + 内容)? + <code>{- end -}</code></td><td>条件判断</td><td><code>{- if $show -}显示内容{- end -}</code></td></tr>
+<tr><td><strong>作用域控制</strong></td><td>with 块</td><td><code>{- with 表达式 -}</code> + 内容 + <code>{- end -}</code></td><td>创建新的作用域</td><td><code>{- with $user -}{.name}{- end -}</code></td></tr>
+<tr><td><strong>文件包含</strong></td><td>include 命令</td><td><code>{- include "文件名" 参数... -}</code></td><td>包含其他模板文件</td><td><code>{- include "header.html" -}</code></td></tr>
+</tbody></table>
 <h2>短代码系统</h2>
-<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
-|---------|---------|---------|------|------|
-| <strong>短代码</strong> | 单标签短代码 | <code>{&lt; 名称 参数... /&gt;}</code> | 自闭合的短代码 | <code>{&lt; image src="pic.jpg" /&gt;}</code> |
-| | 块级短代码 | <code>{&lt; 名称 参数... &gt;}</code> + 内容 + <code>{&lt;/ 名称 &gt;}</code> | 包含内容的短代码 | <code>{&lt; panel &gt;}内容{&lt;/ panel &gt;}</code> |</p>
+<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>短代码</strong></td><td>单标签短代码</td><td><code>{&lt; 名称 参数... /&gt;}</code></td><td>自闭合的短代码</td><td><code>{&lt; image src="pic.jpg" /&gt;}</code></td></tr>
+<tr><td></td><td>块级短代码</td><td><code>{&lt; 名称 参数... &gt;}</code> + 内容 + <code>{&lt;/ 名称 &gt;}</code></td><td>包含内容的短代码</td><td><code>{&lt; panel &gt;}内容{&lt;/ panel &gt;}</code></td></tr>
+</tbody></table>
 <h2>内容替换</h2>
-<p>| 语法类别 | 语法名称 | 语法格式 | 描述 | 示例 |
-|---------|---------|---------|------|------|
-| <strong>内容替换</strong> | 表达式替换 | <code>{:</code> + 表达式 + <code>:}</code> | 计算并输出表达式结果 | <code>{:$a + $b:}</code> |
-| | get 替换 | <code>{:</code> + <code>get</code> + 表达式 + <code>:}</code> | 显式获取并输出值 | <code>{:$user.name:}</code> |</p>
+<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
+<tr><td><strong>内容替换</strong></td><td>表达式替换</td><td><code>{:</code> + 表达式 + <code>:}</code></td><td>计算并输出表达式结果</td><td><code>{:$a + $b:}</code></td></tr>
+<tr><td></td><td>get 替换</td><td><code>{:</code> + <code>get</code> + 表达式 + <code>:}</code></td><td>显式获取并输出值</td><td><code>{:$user.name:}</code></td></tr>
+</tbody></table>
 <h2>操作符</h2>
-<p>| 操作符类型 | 操作符 | 描述 | 优先级 |
-|----------|--------|------|--------|
-| <strong>逻辑操作符</strong> | <code>&amp;&amp;</code> | 逻辑与 | 低 |
-| | <code>\|\|</code> | 逻辑或 | 低 |
-| <strong>比较操作符</strong> | <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> | 比较运算 | 中 |
-| <strong>算术操作符</strong> | <code>+</code>, <code>-</code> | 加减法 | 中 |
-| | <code>*</code>, <code>/</code>, <code>%</code> | 乘除取模 | 高 |
-| <strong>一元操作符</strong> | <code>!</code>, <code>+</code>, <code>-</code> | 逻辑非、正负号 | 最高 |</p>
+<table><thead><tr><th>操作符类型</th><th>操作符</th><th>描述</th><th>优先级</th></tr></thead><tbody>
+<tr><td><strong>逻辑操作符</strong></td><td><code>&amp;&amp;</code></td><td>逻辑与</td><td>低</td></tr>
+<tr><td></td><td><code>||</code></td><td>逻辑或</td><td>低</td></tr>
+<tr><td><strong>比较操作符</strong></td><td><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td><td>比较运算</td><td>中</td></tr>
+<tr><td><strong>算术操作符</strong></td><td><code>+</code>, <code>-</code></td><td>加减法</td><td>中</td></tr>
+<tr><td></td><td><code>*</code>, <code>/</code>, <code>%</code></td><td>乘除取模</td><td>高</td></tr>
+<tr><td><strong>一元操作符</strong></td><td><code>!</code>, <code>+</code>, <code>-</code></td><td>逻辑非、正负号</td><td>最高</td></tr>
+</tbody></table>
 <h2>特殊关键字</h2>
-<p>| 关键字 | 描述 |
-|--------|------|
-| <code>this</code> | 引用当前上下文对象 |
-| <code>param</code> | 引用模板参数 |
-| <code>site</code> | 引用站点全局变量 |
-| <code>pages</code> | 引用页面集合 |</p>
+<table><thead><tr><th>关键字</th><th>描述</th></tr></thead><tbody>
+<tr><td><code>this</code></td><td>引用当前上下文对象</td></tr>
+<tr><td><code>param</code></td><td>引用模板参数</td></tr>
+<tr><td><code>site</code></td><td>引用站点全局变量</td></tr>
+<tr><td><code>pages</code></td><td>引用页面集合</td></tr>
+</tbody></table>
  
         </div>
       </article>
-    </div>
+
+  
+ 
+
+<div id="gitalk-container"></div>
+
+<div 
+data-client-id=" Ov23livxBGg30QbIUQse "
+data-client-secret=" a0f8e2c1678f075a9c1519e4b4f970356dd55c6c "
+data-repo=" Axolotl-Wiki "
+data-owner=" PKUSoftwareEngineeringTeam "
+data-admin=" LeoDreamer2004 " 
+ data-title=" Axolotl Wiki Feedback "  
+ data-language=" zh-CN "  
+id="gitalk-data">
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+<script>
+    var gitalkData = document.getElementById('gitalk-data');
+    var gitalk = new Gitalk({
+        clientID: gitalkData.getAttribute('data-client-id').trim(),
+        clientSecret: gitalkData.getAttribute('data-client-secret').trim(),
+        repo: gitalkData.getAttribute('data-repo').trim(),
+        owner: gitalkData.getAttribute('data-owner').trim(),
+        admin: [gitalkData.getAttribute('data-admin').trim()],
+        id: location.pathname,      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false,  // Facebook-like distraction
+        title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
+        language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
+    });
+
+    console.log("Gitalk initialized:", gitalk);
+
+    gitalk.render('gitalk-container')
+</script>
+
+ 
+ 
+     </div>
   </main>
 
   <footer class="site-footer">
