@@ -119,13 +119,22 @@ id="gitalk-data">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
     var gitalkData = document.getElementById('gitalk-data');
+    var path = location.pathname;
+    if (path.endsWith('index.html')) {
+        path = path.slice(0, -10);
+    } else if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    }
+    console.log("Page path for Gitalk ID:", path);
+    let md5_id = CryptoJS.MD5(path).toString();
+
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
         clientSecret: gitalkData.getAttribute('data-client-secret').trim(),
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: CryptoJS.MD5(location.pathname).toString(), // Ensure uniqueness and length less than 50
+        id: md5_id, // Ensure uniqueness and length less than 50
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
