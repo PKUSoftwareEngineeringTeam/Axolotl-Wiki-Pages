@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,27 +21,26 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> Allay 模板作用域 </h1>
+        <h1 class="article-title"> Allay 模板作用域 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <p><code>templates</code> 目录中的每个 html 文件都有自己的变量作用域。使用 <code>{: . :}</code> 访问当前作用域。</p>
 <h2>子作用域（Child Scope）</h2>
 <p>为简化操作，Allay 提供了 <code>with</code> 指令用于创建子作用域。</p>
@@ -73,7 +68,7 @@ footer = "Axolotl Theme, 2025"
 </code></pre>
 <h2>Markdown 页面作用域（Markdown Page Scope）</h2>
 <p>对于每个 markdown 页面，Allay 会解析其 front-matter 并传递到页面作用域。</p>
-<p>在常规页面（如 <code>page.html</code>）的 <a href="./layouts.md">模板</a> 中，可以通过当前页面对象 <code>.</code> 直接访问 front-matter 参数，并通过特殊变量 <code>.content</code> 获取 markdown 文件内容。</p>
+<p>在常规页面（如 <code>page.html</code>）的 <a href="./layouts">模板</a> 中，可以通过当前页面对象 <code>.</code> 直接访问 front-matter 参数，并通过特殊变量 <code>.content</code> 获取 markdown 文件内容。</p>
 <p>基本用法示例：</p>
 <p><code>content/some-path/index.md</code>：</p>
 <pre><code class="language-md">---
@@ -111,8 +106,8 @@ Hello, this is a test page.
 &lt;/ul&gt;
 </code></pre>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -134,15 +129,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -150,7 +149,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -163,7 +162,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -174,6 +173,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

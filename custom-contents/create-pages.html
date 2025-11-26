@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,30 +21,29 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> 创建自定义页面 </h1>
+        <h1 class="article-title"> 创建自定义页面 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <h2>创建页面</h2>
 <p>你可以通过将 Markdown 文件添加到 <code>content</code> 目录，在 Allay 中创建自定义页面。当你运行 <code>allay build</code> 或 <code>allay server</code> 命令时，每个 Markdown 文件都会被转换为静态 HTML 页面。</p>
-<p>所有 Markdown 文件都应在文件顶部包含 front-matter 元数据。关于可用的元数据字段，请参见 <a href="./front-matter.html">Front-matter</a>。</p>
+<p>所有 Markdown 文件都应在文件顶部包含 front-matter 元数据。关于可用的元数据字段，请参见 <a href="./front-matter">Front-matter</a>。</p>
 <h2>文件组织</h2>
 <p>除非在 front-matter 中指定了 "url" 字段，否则页面的 URL 会根据文件路径自动生成。需要注意的是，文件名为 <code>index.md</code> 的文件具有特殊意义，它会被视为该目录的根页面。</p>
 <p>例如，以下文件结构：</p>
@@ -69,7 +64,7 @@
 └── projects
     └── project1.html   # 来自 projects/project1.md
 </code></pre>
-<p>如果你采用了类似的多级目录，并写有多个对应的<a href="../allay-template/layout.md">模版布局</a>,那么你可以在目录的index文件和其他文件中采用不同的template配置。比如：</p>
+<p>如果你采用了类似的多级目录，并写有多个对应的<a href="../allay-template/layout">模版布局</a>,那么你可以在目录的index文件和其他文件中采用不同的template配置。比如：</p>
 <p><code>public/blog/index.html</code>:</p>
 <pre><code class="language-md">---
 title: My School Blog 
@@ -88,8 +83,8 @@ Hello, this is my first post of this series.
 ...
 </code></pre>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -111,15 +106,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -127,7 +126,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -140,7 +139,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -151,6 +150,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

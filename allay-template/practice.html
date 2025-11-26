@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,27 +21,26 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> Allay 模板实战 </h1>
+        <h1 class="article-title"> Allay 模板实战 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <p>本指南将通过构建一个显示两篇文章的主页，串联讲解 Commands、Layouts、Scope 和 Variables 的实际应用。
 非开发用户无需关注涉及templates文件夹的内容。</p>
 <h2>项目结构</h2>
@@ -233,10 +228,10 @@ template: index.html
 </ul>
 <p>详细用法请参见：</p>
 <ul>
-<li><a href="./commands.html">Commands 指令详解</a></li>
-<li><a href="./scope.html">Scope 作用域详解</a></li>
-<li><a href="./variables.html">Variables 变量详解</a></li>
-<li><a href="./layouts.html">Layouts 布局详解</a></li>
+<li><a href="./commands">Commands 指令详解</a></li>
+<li><a href="./scope">Scope 作用域详解</a></li>
+<li><a href="./variables">Variables 变量详解</a></li>
+<li><a href="./layouts">Layouts 布局详解</a></li>
 </ul>
 <h2>最终渲染结果</h2>
 <pre><code class="language-html">&lt;!DOCTYPE html&gt;
@@ -303,8 +298,8 @@ template: index.html
 </code></pre>
 <p>这个实战示例展示了如何将 Allay 模板系统的各个功能模块有机结合，创建一个功能完整、结构清晰的博客主页。</p>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -326,15 +321,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -342,7 +341,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -355,7 +354,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -366,6 +365,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

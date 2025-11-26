@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,27 +21,26 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> 自定义前置元数据 </h1>
+        <h1 class="article-title"> 自定义前置元数据 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <p>Markdown 支持在文件顶部添加前置元数据（front-matter）。前置内容需使用 <code>---</code>（YAML 格式）或 <code>+++</code>（TOML 格式）包裹。两种格式均被支持。</p>
 <p>以下是一个 Markdown 文件前置内容的示例：</p>
 <pre><code class="language-md">---
@@ -67,7 +62,7 @@ tags = ["介绍", "欢迎"]
 <p>以下是 Allay 支持的默认元数据字段，均为可选：</p>
 <table><thead><tr><th>字段</th><th>类型</th><th>说明</th></tr></thead><tbody>
 <tr><td><code>head</code></td><td>字符串</td><td>此<strong>网页</strong>的标题（不是文章标题）。</td></tr>
-<tr><td><code>template</code></td><td>字符串</td><td>指定使用的<a href="../allay-template/layout.html">布局模板</a>。</td></tr>
+<tr><td><code>template</code></td><td>字符串</td><td>指定使用的<a href="../allay-template/layout">布局模板</a>。</td></tr>
 <tr><td><code>title</code></td><td>字符串</td><td>页面标题，通常显示在页面内容的顶部。</td></tr>
 <tr><td><code>date</code></td><td>日期</td><td>页面发布日期，通常格式如 "2024-01-01"。</td></tr>
 <tr><td><code>description</code></td><td>字符串</td><td>页面描述，通常用于 SEO 和摘要。</td></tr>
@@ -76,8 +71,8 @@ tags = ["介绍", "欢迎"]
 </tbody></table>
 <p>注意：<code>title</code>、<code>description</code> 和 <code>tags</code> 等字段通常在你的 <strong>主题模板</strong> 中使用，而不是 <strong>博客</strong> 本身。</p>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -99,15 +94,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -115,7 +114,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -128,7 +127,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -139,6 +138,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

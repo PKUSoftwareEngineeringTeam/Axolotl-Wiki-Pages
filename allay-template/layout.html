@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,33 +21,32 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> 自定义布局模板 </h1>
+        <h1 class="article-title"> 自定义布局模板 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <h2>布局</h2>
 <p>所有的 Allay 模板都应放在 <code>templates</code> 目录下。你至少需要包含以下默认模板：</p>
 <ul>
 <li><code>page.html</code>：常规页面的默认模板。</li>
 </ul>
-<p>当 markdown--<a href="../custom-contents/front-matter.html">front matter</a> 中未指定 url 字段时，Allay 会使用 <code>page.html</code> 模板渲染页面。</p>
+<p>当 markdown--<a href="../custom-contents/front-matter">front matter</a> 中未指定 url 字段时，Allay 会使用 <code>page.html</code> 模板渲染页面。</p>
 <h3>自定义模板布局</h3>
 <p>并非所有页面都应使用相同的布局。你可以在 front matter 中通过 <code>template</code> 字段为每个页面指定不同的模板。例如：</p>
 <p><code>content/about/index.md</code>：</p>
@@ -70,8 +65,8 @@ Hello, this is the about page.
 </code></pre>
 <p>这样，你可以为博客中的不同类型页面创建自定义布局。只需确保指定的模板文件存在于 <code>templates</code> 目录中即可。</p>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -93,15 +88,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -109,7 +108,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -122,7 +121,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -133,6 +132,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

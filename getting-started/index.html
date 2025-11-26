@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,27 +21,26 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> 快速开始 </h1>
+        <h1 class="article-title"> 快速开始 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <p>欢迎使用 Allay 博客引擎！本指南将帮助你快速创建并运行你的第一个 Allay 博客。</p>
 <h2>安装 Allay</h2>
 <p>首先，你需要安装 Allay。你可以通过以下两种方式获取：</p>
@@ -86,7 +81,7 @@ allay init
 ├── static/          # 静态资源（图片、PDF等）
 └── themes/          # 主题目录
 </code></pre>
-<p>简单来说，<code>contents/</code> 目录用于存放你的博客内容，<code>static/</code> 目录用于存放静态资源（如图片），<code>themes/</code> 目录用于存放博客主题。更多详情请参见 <a href="./file-structure.md">文件结构</a>。</p>
+<p>简单来说，<code>contents/</code> 目录用于存放你的博客内容，<code>static/</code> 目录用于存放静态资源（如图片），<code>themes/</code> 目录用于存放博客主题。更多详情请参见 <a href="./file-structure">文件结构</a>。</p>
 <h2>选择你的主题</h2>
 <p>allay支持用户创作自己的主题，同时也提供一套官方的主题以供选择。我们先从官方主题开始。</p>
 <pre><code class="language-sh">cd themes
@@ -110,12 +105,12 @@ git clone https://github.com/PKUSoftwareEngineeringTeam/Axolotl.git
 </ol>
 <p>尽情享受你的博客创作之旅吧！</p>
 <h2>More....</h2>
-<p>如果你想要了解更多allay“隐藏”语法，请阅读<a href="../allay-template/index.html">allay模版</a></p>
-<p>如果你想要学习如何更好的创建和管理自定义内容，请阅读<a href="../custom-contents/index.html">自定义内容</a></p>
-<p>如果你是我们的高阶用户，想要创作自己的主题，请阅读<a href="../custom-themes/index.html">自定义主题</a></p>
+<p>如果你想要了解更多allay“隐藏”语法，请阅读<a href="../allay-template/">allay模版</a></p>
+<p>如果你想要学习如何更好的创建和管理自定义内容，请阅读<a href="../custom-contents/">自定义内容</a></p>
+<p>如果你是我们的高阶用户，想要创作自己的主题，请阅读<a href="../custom-themes/">自定义主题</a></p>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -137,15 +132,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -153,7 +152,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -166,7 +165,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -177,6 +176,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 

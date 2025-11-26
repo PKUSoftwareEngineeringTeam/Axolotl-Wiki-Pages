@@ -12,10 +12,6 @@
     <link rel="stylesheet" href="style_official.css" />
 </head> 
 
-<head>
-  <link rel="stylesheet" href="toc.css" />
-</head>
-
 <body>
   <header class="header">
     <nav class="nav container">
@@ -25,27 +21,26 @@
 
         <ul class="nav-menu">
             <li><a href="" class="nav-link">首页</a></li>
-            <li><a href="blog.html" class="nav-link">博客</a></li>
-            <li><a href="about.html" class="nav-link">关于</a></li>
-            <li><a href="contact.html" class="nav-link">联系</a></li>
+            <li><a href="blog" class="nav-link">博客</a></li>
+            <li><a href="about" class="nav-link">关于</a></li>
+            <li><a href="contact" class="nav-link">联系</a></li>
         </ul>
 
         
     </nav>
 </header> 
-
   <main class="main">
     <div class="container">
-      <article class="article fade-in">
-        <header class="article-header">
+  <article class="article fade-in">
+    <header class="article-header">
  
-          <h1 class="article-title"> Allay 模板 </h1>
+        <h1 class="article-title"> Allay 模板 </h1>
  
 
  
-        </header>
+    </header>
 
-        <div class="article-content">
+    <div class="article-content">
  <p>Allay 使用模板系统来定义博客的外观和布局。模板文件通常采用 HTML 格式，并包含特定的占位符，用于动态插入内容。</p>
 <p>如果你仅是博客创作者，通常不需要直接修改模板文件。你可以通过修改配置文件和内容文件来定制博客的外观。</p>
 <p>另外，你也许想要学习一些模板语法，以便在内容中使用自定义短代码或变量。那么下面的章节将对你有所帮助。</p>
@@ -77,7 +72,7 @@ template: about.html  #(假设templates目录下有about.html)
 
 Hello, this is the about page.
 </code></pre>
-<p>更多详情请参见<a href="./layout.md">布局</a>。</p>
+<p>更多详情请参见<a href="./layout">布局</a>。</p>
 <h3>模板语法</h3>
 <p>allay有自己独特的语法系统，用于在模板中插入动态内容。你可以使用占位符来引用变量、条件语句和循环等。例如：</p>
 <pre><code class="language-html">&lt;h1&gt;{: .title :}&lt;/h1&gt;
@@ -85,7 +80,7 @@ Hello, this is the about page.
 &lt;p&gt;欢迎回来，{: .user.name :}!&lt;/p&gt;
 {- end -}
 </code></pre>
-<p>在此之前，最好了解一下<a href="variables.md">变量</a>和<a href="scope.md">作用域</a>的概念。接下来我们将学习allay基本语法。</p>
+<p>在此之前，最好了解一下<a href="variables">变量</a>和<a href="scope">作用域</a>的概念。接下来我们将学习allay基本语法。</p>
 <h3>基本语法标记</h3>
 <ul>
 <li><code>{: 表达式 :}</code> - 输出表达式的结果</li>
@@ -124,12 +119,12 @@ Hello, this is the about page.
 <li><strong>命令块</strong> - 用<code>{- -}</code>包裹控制逻辑</li>
 <li><strong>输出块</strong> - 用<code>{: :}</code>包裹要显示的内容</li>
 </ol>
-<p>这个简明的语法系统让你能轻松创建动态模板，同时保持代码的清晰和可维护性。更多详情请参见<a href="./commands.md">命令和语法</a>，这个文档的最后还总结了allay所有的语法生成规则，建议仔细阅读。</p>
+<p>这个简明的语法系统让你能轻松创建动态模板，同时保持代码的清晰和可维护性。更多详情请参见<a href="./commands">命令和语法</a>，这个文档的最后还总结了allay所有的语法生成规则，建议仔细阅读。</p>
 <h2>实战</h2>
-<p>最后我们给出了一个<a href="practice.md">实战</a>的例子，希望能给用户提供一个参考。</p>
+<p>最后我们给出了一个<a href="practice">实战</a>的例子，希望能给用户提供一个参考。</p>
  
-        </div>
-      </article>
+    </div>
+</article> 
 
   
  
@@ -151,15 +146,19 @@ id="gitalk-data">
 <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 <script>
+    // mapping page path to the standard
     var gitalkData = document.getElementById('gitalk-data');
     var path = location.pathname;
-    if (path.endsWith('index.html')) {
-        path = path.slice(0, -10);
-    } else if (path.endsWith('.html')) {
+    if (path.endsWith('.html')) {
+        path = path.slice(0, -5);
+    } 
+    if (path.endsWith('index')) {
         path = path.slice(0, -5);
     }
     console.log("Page path for Gitalk ID:", path);
-    let md5_id = CryptoJS.MD5(path).toString();
+
+    // generate MD5 hash of the path (< 50 characters)
+    var md5_id = CryptoJS.MD5(path).toString();
 
     var gitalk = new Gitalk({
         clientID: gitalkData.getAttribute('data-client-id').trim(),
@@ -167,7 +166,7 @@ id="gitalk-data">
         repo: gitalkData.getAttribute('data-repo').trim(),
         owner: gitalkData.getAttribute('data-owner').trim(),
         admin: [gitalkData.getAttribute('data-admin').trim()],
-        id: md5_id, // Ensure uniqueness and length less than 50
+        id: md5_id,
         distractionFreeMode: false,  // Facebook-like distraction
         title: gitalkData.getAttribute('data-title') ? gitalkData.getAttribute('data-title').trim() : undefined,
         language: gitalkData.getAttribute('data-language') ? gitalkData.getAttribute('data-language').trim() : undefined,
@@ -180,7 +179,7 @@ id="gitalk-data">
 
  
  
-     </div>
+    </div>
   </main>
 
   <footer class="site-footer">
@@ -191,6 +190,8 @@ id="gitalk-data">
 </footer>
 
 <script src="script.js"></script> 
+
+  <link rel="stylesheet" href="toc.css" />
   <script src="toc.js"></script>
 </body>
 
