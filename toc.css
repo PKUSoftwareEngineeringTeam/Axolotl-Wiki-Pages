@@ -69,6 +69,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all 0.25s ease-in-out;
+    border-bottom: none;
 }
 
 .toc-sidebar a:hover {
@@ -89,16 +90,55 @@
 }
 
 /* 二级标题缩进 */
+/* bullets for different levels */
+.toc-h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--h);
+}
+.toc-sidebar a.toc-h2::before { background: var(--h); }
 .toc-h3 {
     margin-left: 8px;
-    border-left: 2px solid transparent;
+    font-size: 0.88rem;
+    color: var(--fg-muted);
+    opacity: 0.9;
+}
+.toc-sidebar a.toc-h3::before { background: var(--fg-muted); }
+.toc-h4 {
+    margin-left: 16px;
+    font-size: 0.83rem;
+    color: var(--fg-muted);
+    opacity: 0.85;
+}
+.toc-sidebar a.toc-h4::before { background: rgba(0,0,0,0.08); }
+.toc-h5 {
+    margin-left: 24px;
+    font-size: 0.78rem;
+    color: var(--fg-muted);
     opacity: 0.8;
 }
+.toc-sidebar a.toc-h5::before { background: rgba(0,0,0,0.06); }
+.toc-h6 {
+    margin-left: 32px;
+    font-size: 0.75rem;
+    color: var(--fg-muted);
+    opacity: 0.75;
+}
+.toc-sidebar a.toc-h6::before { background: rgba(0,0,0,0.04); }
 
 .toc-sidebar a.active {
     color: var(--accent-strong);
     font-weight: 600;
     /* 稍微加粗 */
+}
+
+.toc-sidebar a::before {
+    transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.toc-sidebar a.active::before {
+    transform: scale(1.2);
+    background: var(--accent-strong);
 }
 
 .toc-title {

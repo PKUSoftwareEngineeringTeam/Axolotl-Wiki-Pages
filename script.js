@@ -59,4 +59,61 @@ class MobileMenu {
 document.addEventListener('DOMContentLoaded', () => {
     new ThemeManager();
     new MobileMenu();
+    colorizeTagPills();
+    formatArticleDates();
 });
+
+/**
+ * Format any <time class="article-date"> datetime attribute into a
+ * localized, human-friendly date string (zh-CN format: YYYY年M月D日).
+ */
+function formatArticleDates() {
+    const timeEls = document.querySelectorAll('time.article-date');
+    timeEls.forEach((el) => {
+        let dt = el.getAttribute('datetime');
+        if (!dt) return;
+        dt = dt.trim();
+        const d = new Date(dt);
+        if (isNaN(d)) {
+            // debug: invalid date format
+            console.warn('formatArticleDates: invalid date for element', el, 'datetime:', el.getAttribute('datetime'));
+            return;
+        }
+        try {
+            const formatted = d.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+            el.textContent = formatted;
+        } catch (e) {
+            // Fallback: keep original content
+        }
+    });
+}
+
+/**
+ * Deterministically assigns background colors to tag pills.
+ * Restricted to Blue-Purple shades (Hue 210 - 275).
+ */
+function colorizeTagPills() {
+    // Simple hash to map a string to an integer
+    function getHash(str) {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = ((hash << 5) - hash) + str.charCodeAt(i);
+            hash |= 0; // Convert to 32bit int
+        }
+        return Math.abs(hash);
+    }
+
+    const tagPills = document.querySelectorAll('.tag-pill');
+
+    tagPills.forEach((el) => {
+        const tag = (el.textContent || el.innerText || '').trim();
+        if (!tag) return;
+        const hash = getHash(tag);
+        const hue = 210 + (hash % 65);
+        const sat = 50 + (hash % 25);
+        const light = 42 + (hash % 16);
+        el.style.backgroundColor = `hsl(${hue}, ${sat}%, ${light}%)`;
+        el.style.color = '#ffffff';
+        el.style.borderColor = `hsl(${hue}, ${sat}%, ${light - 5}%)`;
+    });
+}
