@@ -1,0 +1,26 @@
+.error-page {
+    text-align: center;
+    padding: 3rem 2rem 2.6rem;
+}
+
+.error-icon {
+    font-size: 2.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.error-code {
+    font-size: 3.2rem;
+    margin: 0 0 0.2rem;
+    letter-spacing: 0.12em;
+}
+
+.error-title {
+    margin: 0 0 0.8rem;
+    font-size: 1.4rem;
+}
+
+.error-text {
+    margin: 0 0 1.8rem;
+    font-size: 0.98rem;
+    color: var(--fg-muted);
+}
