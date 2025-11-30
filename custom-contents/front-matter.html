@@ -5,38 +5,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> 自定义前置元数据 </title>
-    <link rel="stylesheet" href="/css/base.css" />
-    <script src="/js/base.js"></script>
-</head>
 
-<body>
-    <div id="site-meta" data-base=" https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ "></div>
-</body>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const pairs = [
-            ['a', 'href'],
-            ['link', 'href'],
-            ['script', 'src'],
-            ['img', 'src'],
-            ['source', 'src'],
-            ['video', 'src'],
-            ['audio', 'src'],
-            ['iframe', 'src']
-        ]
+    <script>
+        document.addEventListener('load', function () {
+            let pairs = [
+                ['a', 'href'],
+                ['link', 'href'],
+                ['script', 'src'],
+                ['img', 'src'],
+                ['source', 'src'],
+                ['video', 'src'],
+                ['audio', 'src']
+                ['iframe', 'src']
+            ]
 
 
-        pairs.forEach(([tag, attr]) => {
-            document.querySelectorAll(tag).forEach(element => {
-                let link = element.getAttribute(attr);
-                if (link && link.startsWith('/')) {
-                    element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
-                }
+            pairs.forEach(([tag, attr]) => {
+                document.querySelectorAll(tag).forEach(element => {
+                    let link = element.getAttribute(attr);
+                    if (link && link.startsWith('/')) {
+                        element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
+                    }
+                });
             });
         });
-    });
-</script> 
+    </script>
+
+    <link rel="stylesheet" href="/css/base.css" />
+</head> 
 
 
 <body>

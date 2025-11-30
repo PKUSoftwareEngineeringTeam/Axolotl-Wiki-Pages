@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
- <head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Axolotl Wiki </title>
-    <link rel="stylesheet" href="/css/index.css" />
-    <link rel="icon" href="/favicon.ico">
-</head>
+
+    <script>
+        document.addEventListener('load', function () {
+            let pairs = [
+                ['a', 'href'],
+                ['link', 'href'],
+                ['script', 'src'],
+                ['img', 'src'],
+                ['source', 'src'],
+                ['video', 'src'],
+                ['audio', 'src']
+                ['iframe', 'src']
+            ]
+
+
+            pairs.forEach(([tag, attr]) => {
+                document.querySelectorAll(tag).forEach(element => {
+                    let link = element.getAttribute(attr);
+                    if (link && link.startsWith('/')) {
+                        element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
+                    }
+                });
+            });
+        });
+    </script>
+
+    <link rel="stylesheet" href="/css/base.css" />
+</head> 
+
+<link rel="stylesheet" href="/css/index.css" />
+<link rel="icon" href="/favicon.ico">
 
 <body>
     <header class="header">
