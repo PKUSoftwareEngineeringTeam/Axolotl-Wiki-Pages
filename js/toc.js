@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const tocContainer = document.createElement('div');
     tocContainer.className = 'toc-sidebar';
 
-    // === 配置项 ===
     const HEADER_OFFSET = 100;
     const OBSERVER_MARGIN = '-90px 0px -60% 0px';
     let isClicking = false; 
@@ -13,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const articleTitle = document.querySelector('h1');
     const titleText = articleTitle ? articleTitle.innerText : '目录';
 
-    // 创建 h3 元素
     const tocTitle = document.createElement('h3');
     tocTitle.className = 'toc-title';
     tocTitle.innerText = titleText;

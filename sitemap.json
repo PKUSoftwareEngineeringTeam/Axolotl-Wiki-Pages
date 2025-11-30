@@ -1,49 +1,49 @@
 {
   "urlset": {
-    "configuration/index.md": {
-      "lastmod": 1764496746
-    },
-    "custom-themes/structure.md": {
-      "lastmod": 1764496746
-    },
-    "extra-functions/shortcode.md": {
-      "lastmod": 1764496746
-    },
-    "welcome.md": {
-      "lastmod": 1764496746
-    },
-    "custom-contents/front-matter.md": {
-      "lastmod": 1764496746
-    },
-    "custom-contents/create-pages.md": {
-      "lastmod": 1764496746
+    "allay-template/index.md": {
+      "lastmod": 1764501862
     },
     "allay-template/variables.md": {
-      "lastmod": 1764496746
-    },
-    "allay-template/index.md": {
-      "lastmod": 1764496746
-    },
-    "allay-template/scope.md": {
-      "lastmod": 1764496746
-    },
-    "allay-template/commands.md": {
-      "lastmod": 1764496746
+      "lastmod": 1764501862
     },
     "getting-started/file-structure.md": {
-      "lastmod": 1764496746
-    },
-    "about.md": {
-      "lastmod": 1764496746
+      "lastmod": 1764501862
     },
     "allay-template/layout.md": {
-      "lastmod": 1764496746
+      "lastmod": 1764501862
+    },
+    "about.md": {
+      "lastmod": 1764501862
     },
     "allay-template/practice.md": {
-      "lastmod": 1764496746
+      "lastmod": 1764501862
     },
     "getting-started/index.md": {
-      "lastmod": 1764496746
+      "lastmod": 1764501862
+    },
+    "custom-themes/structure.md": {
+      "lastmod": 1764501862
+    },
+    "custom-contents/create-pages.md": {
+      "lastmod": 1764501862
+    },
+    "configuration/index.md": {
+      "lastmod": 1764501862
+    },
+    "extra-functions/shortcode.md": {
+      "lastmod": 1764501862
+    },
+    "allay-template/scope.md": {
+      "lastmod": 1764501862
+    },
+    "welcome.md": {
+      "lastmod": 1764501862
+    },
+    "custom-contents/front-matter.md": {
+      "lastmod": 1764501862
+    },
+    "allay-template/commands.md": {
+      "lastmod": 1764501862
     }
   }
 }

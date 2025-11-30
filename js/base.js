@@ -5,7 +5,7 @@ class ThemeManager {
         this.currentTheme = this.themes.includes(savedTheme) ? savedTheme : 'light';
         this.init();
     }
-    
+
     isValidTheme(theme) {
         return this.themes.includes(theme);
     }
@@ -90,7 +90,7 @@ function formatArticleDates() {
 
 /**
  * Deterministically assigns background colors to tag pills.
- * Restricted to Blue-Purple shades (Hue 210 - 275).
+ * Restricted to pastel colors for better aesthetics.
  */
 function colorizeTagPills() {
     // Simple hash to map a string to an integer
@@ -109,11 +109,40 @@ function colorizeTagPills() {
         const tag = (el.textContent || el.innerText || '').trim();
         if (!tag) return;
         const hash = getHash(tag);
-        const hue = 210 + (hash % 65);
-        const sat = 50 + (hash % 25);
-        const light = 42 + (hash % 16);
-        el.style.backgroundColor = `hsl(${hue}, ${sat}%, ${light}%)`;
-        el.style.color = '#ffffff';
-        el.style.borderColor = `hsl(${hue}, ${sat}%, ${light - 5}%)`;
+
+        const hue = hash % 360; // Hue between 0-359
+        const sat = 40 + (hash % 25); // Saturation between 40-64%
+        const light = 82 + (hash % 10); // Lightness between 82-91% 
+
+        const bgColor = `hsl(${hue}, ${sat}%, ${light}%)`;
+        el.style.backgroundColor = bgColor;
+
+        const textLight = light - 60;
+        el.style.color = `hsl(${hue}, ${sat}%, ${textLight}%)`;
+
+        const borderLight = light - 20;
+        el.style.borderColor = `hsl(${hue}, ${sat}%, ${borderLight}%)`;
     });
+}
+
+
+/**
+ * Fetch the site map JSON file.
+ */
+async function fetchSiteMap() {
+    const siteMeta = document.getElementById('site-meta');
+    const baseUrl = siteMeta ? siteMeta.getAttribute('data-base') || '' : '';
+    const siteMap = "sitemap.json";
+    try {
+        const response = await fetch(baseUrl.trim() + siteMap);
+        if (!response.ok) {
+            console.error('Failed to fetch sitemap:', response.statusText);
+            return null;
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching sitemap:', error);
+        return null;
+    }
 }

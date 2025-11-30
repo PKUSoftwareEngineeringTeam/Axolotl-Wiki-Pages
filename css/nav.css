@@ -1,10 +1,23 @@
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 20;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     border-bottom: 1px solid var(--border-subtle);
-    background: rgba(230, 243, 255, 0.9);
+    background: rgba(194, 226, 255, 0.6);
     backdrop-filter: blur(18px);
+}
+
+.header.scrolled {
+    height: 50px;
+    margin: 10px;
+    border-radius: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .nav {
@@ -13,11 +26,21 @@
     justify-content: space-between;
     height: 64px;
     gap: 1.5rem;
+    transition: all 0.4s ease;
+}
+
+.nav.container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
+
+.header.scrolled .nav {
+    height: 50px;
 }
 
 .nav-brand span {
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 .axolotl-gradient {
@@ -50,7 +73,6 @@
 }
 
 .nav-link {
-    font-size: 0.95rem;
     font-weight: 500;
     color: var(--fg-muted);
     position: relative;
@@ -99,12 +121,16 @@
 }
 
 .github-corner svg {
-    fill: #2a2a2a;
+    fill: #4a4a4a;
     color: #fff;
     position: absolute;
     top: 0;
     right: 0;
     border: 0;
+}
+
+.scrolled .github-corner {
+    display: none;
 }
 
 .github-corner:hover .octo-arm {
@@ -129,7 +155,6 @@
     }
 }
 
-/* 在小屏幕上隐藏动画 */
 @media (max-width: 500px) {
     .github-corner:hover .octo-arm {
         animation: none;

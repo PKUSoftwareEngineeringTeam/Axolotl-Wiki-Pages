@@ -1,5 +1,6 @@
 :root {
     --bg: #e6f3ff;
+    --content-bg: #f5f5ff;
     --bg-elevated: rgba(255, 255, 255, 0.86);
     --fg: #111827;
     --fg-muted: #4b5563;
@@ -62,13 +63,6 @@ a:hover {
     padding: 0;
     margin: 0;
     background: none !important;
-}
-
-.container {
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
 }
 
 .main {
