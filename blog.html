@@ -7,36 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Blog · Axolotl Wiki </title>
 
-    <script>
-        document.addEventListener('load', function () {
-            let pairs = [
-                ['a', 'href'],
-                ['link', 'href'],
-                ['script', 'src'],
-                ['img', 'src'],
-                ['source', 'src'],
-                ['video', 'src'],
-                ['audio', 'src']
-                ['iframe', 'src']
-            ]
-
-
-            pairs.forEach(([tag, attr]) => {
-                document.querySelectorAll(tag).forEach(element => {
-                    let link = element.getAttribute(attr);
-                    if (link && link.startsWith('/')) {
-                        element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
-                    }
-                });
-            });
-        });
-    </script>
-
-    <link rel="stylesheet" href="/css/base.css" />
-</head> 
+    <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
+    <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+</head>
 
 <body>
-  <link rel="stylesheet" href="/css/nav.css" />
+    <div id="site-meta" data-base=" https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ "></div>
+</body> 
+
+<body>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
 
 <header class="header" id="header">
     <nav class="nav container">
@@ -45,10 +25,10 @@
         </a>
 
         <ul class="nav-menu">
-            <li><a href="/" class="nav-link">首页</a></li>
-            <li><a href="/blog" class="nav-link">博客</a></li>
-            <li><a href="/about" class="nav-link">关于</a></li>
-            <li><a href="/contact" class="nav-link">联系</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/" class="nav-link">首页</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/blog" class="nav-link">博客</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
 
  
@@ -78,17 +58,17 @@
     });
 </script> 
 
-  <link rel="stylesheet" href="/css/blog.css" />
-  <script src="/js/blog.js"></script>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/blog.css" />
+  <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/blog.js"></script>
 
   <main class="main">
     <div class="container">
-  <link rel="stylesheet" href="/css/leftbar.css" />
-<script src="/js/leftbar.js" defer></script>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/leftbar.css" />
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/leftbar.js" defer></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <aside class="blog-sidebar fade-in">
     <div class="avatar-container">
-        <img src="/avatar.png" alt="头像" class="avatar">
+        <img src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/avatar.png" alt="头像" class="avatar">
     </div>
 
     <h2 class="name"> Allay 团队 </h2>
@@ -169,96 +149,6 @@
 
         <section class="blog-list fade-in" aria-label="博客列表" id="blogList">
  
-          <a href=" custom-themes/structure " class="blog-card">
-            <div class="blog-card-main">
-              <h2 class="blog-card-title">
- 
-                 主题文件结构 
-                 
-              </h2>
-
- 
-              <p class="blog-card-excerpt">
- Allay 博客创建自定义主题及其所需的文件结构 
-              </p>
- 
-
- 
-              <div class="blog-card-tags">
- 
-                <span class="tag-pill"> Allay 主题 </span>
- 
-                <span class="tag-pill"> 自定义主题 </span>
- 
-                <span class="tag-pill"> 主题结构 </span>
- 
-              </div>
- 
-
-              <div class="blog-card-meta">
- 
-                <span class="blog-card-date"> 2025-11-24 </span>
- 
-
-                <!-- add by js -->
-                <!-- <span class="blog-card-sep">·</span> -->
-                <!-- <span class="blog-card-read"></span> -->
-
- 
-
- 
-                <div data-group=" 主题定制 "></div>
- 
-              </div>
-            </div>
-
-            <div class="blog-card-arrow">➜</div>
-          </a>
- 
-          <a href=" custom-contents/front-matter " class="blog-card">
-            <div class="blog-card-main">
-              <h2 class="blog-card-title">
- 
-                 自定义前置元数据 
-                 
-              </h2>
-
- 
-              <p class="blog-card-excerpt">
- 使用自定义前置元数据（front matter） 
-              </p>
- 
-
- 
-              <div class="blog-card-tags">
- 
-                <span class="tag-pill"> Allay 内容 </span>
- 
-                <span class="tag-pill"> Front-matter </span>
- 
-              </div>
- 
-
-              <div class="blog-card-meta">
- 
-                <span class="blog-card-date"> 2025-11-24 </span>
- 
-
-                <!-- add by js -->
-                <!-- <span class="blog-card-sep">·</span> -->
-                <!-- <span class="blog-card-read"></span> -->
-
- 
-
- 
-                <div data-group=" 自定义内容 "></div>
- 
-              </div>
-            </div>
-
-            <div class="blog-card-arrow">➜</div>
-          </a>
- 
           <a href=" custom-contents/create-pages " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
@@ -305,35 +195,35 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
-          <a href=" extra-functions/shortcode " class="blog-card">
+          <a href=" getting-started/ " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
  
-                 短代码 
+                 安装与使用 
                  
               </h2>
 
  
               <p class="blog-card-excerpt">
- 了解如何在 Allay 博客中使用短代码来增强内容的动态性和可复用性 
+ 你的 Allay 旅程，从这里开始！ 
               </p>
  
 
  
               <div class="blog-card-tags">
  
-                <span class="tag-pill"> Allay 功能 </span>
+                <span class="tag-pill"> Allay 入门 </span>
  
-                <span class="tag-pill"> 短代码 </span>
+                <span class="tag-pill"> 安装指南 </span>
  
-                <span class="tag-pill"> 内容增强 </span>
+                <span class="tag-pill"> 快速开始 </span>
  
               </div>
  
 
               <div class="blog-card-meta">
  
-                <span class="blog-card-date"> 2025-11-24 </span>
+                <span class="blog-card-date"> 2025-11-20 </span>
  
 
                 <!-- add by js -->
@@ -343,53 +233,7 @@
  
 
  
-                <div data-group=" 额外功能 "></div>
- 
-              </div>
-            </div>
-
-            <div class="blog-card-arrow">➜</div>
-          </a>
- 
-          <a href=" allay-template/layout " class="blog-card">
-            <div class="blog-card-main">
-              <h2 class="blog-card-title">
- 
-                 自定义布局模板 
-                 
-              </h2>
-
- 
-              <p class="blog-card-excerpt">
- 创建和使用自定义布局模板 
-              </p>
- 
-
- 
-              <div class="blog-card-tags">
- 
-                <span class="tag-pill"> Allay 功能 </span>
- 
-                <span class="tag-pill"> 模板 </span>
- 
-                <span class="tag-pill"> 布局 </span>
- 
-              </div>
- 
-
-              <div class="blog-card-meta">
- 
-                <span class="blog-card-date"> 2025-11-23 </span>
- 
-
-                <!-- add by js -->
-                <!-- <span class="blog-card-sep">·</span> -->
-                <!-- <span class="blog-card-read"></span> -->
-
- 
-
- 
-                <div data-group=" Allay 模板 "></div>
+                <div data-group=" 快速开始 "></div>
  
               </div>
             </div>
@@ -426,52 +270,6 @@
               <div class="blog-card-meta">
  
                 <span class="blog-card-date"> 2025-11-26 </span>
- 
-
-                <!-- add by js -->
-                <!-- <span class="blog-card-sep">·</span> -->
-                <!-- <span class="blog-card-read"></span> -->
-
- 
-
- 
-                <div data-group=" Allay 模板 "></div>
- 
-              </div>
-            </div>
-
-            <div class="blog-card-arrow">➜</div>
-          </a>
- 
-          <a href=" allay-template/scope " class="blog-card">
-            <div class="blog-card-main">
-              <h2 class="blog-card-title">
- 
-                 作用域 
-                 
-              </h2>
-
- 
-              <p class="blog-card-excerpt">
- Allay 模板系统中的变量作用域 
-              </p>
- 
-
- 
-              <div class="blog-card-tags">
- 
-                <span class="tag-pill"> Allay 功能 </span>
- 
-                <span class="tag-pill"> 模板 </span>
- 
-                <span class="tag-pill"> 作用域 </span>
- 
-              </div>
- 
-
-              <div class="blog-card-meta">
- 
-                <span class="blog-card-date"> 2025-11-24 </span>
  
 
                 <!-- add by js -->
@@ -535,17 +333,63 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
-          <a href=" allay-template/practice " class="blog-card">
+          <a href=" custom-themes/structure " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
  
-                 Allay 模板实战 
+                 主题文件结构 
                  
               </h2>
 
  
               <p class="blog-card-excerpt">
- 通过实战示例学习 Allay 模板系统的综合应用 
+ Allay 博客创建自定义主题及其所需的文件结构 
+              </p>
+ 
+
+ 
+              <div class="blog-card-tags">
+ 
+                <span class="tag-pill"> Allay 主题 </span>
+ 
+                <span class="tag-pill"> 自定义主题 </span>
+ 
+                <span class="tag-pill"> 主题结构 </span>
+ 
+              </div>
+ 
+
+              <div class="blog-card-meta">
+ 
+                <span class="blog-card-date"> 2025-11-24 </span>
+ 
+
+                <!-- add by js -->
+                <!-- <span class="blog-card-sep">·</span> -->
+                <!-- <span class="blog-card-read"></span> -->
+
+ 
+
+ 
+                <div data-group=" 主题定制 "></div>
+ 
+              </div>
+            </div>
+
+            <div class="blog-card-arrow">➜</div>
+          </a>
+ 
+          <a href=" allay-template/layout " class="blog-card">
+            <div class="blog-card-main">
+              <h2 class="blog-card-title">
+ 
+                 自定义布局模板 
+                 
+              </h2>
+
+ 
+              <p class="blog-card-excerpt">
+ 创建和使用自定义布局模板 
               </p>
  
 
@@ -556,14 +400,14 @@
  
                 <span class="tag-pill"> 模板 </span>
  
-                <span class="tag-pill"> 实战 </span>
+                <span class="tag-pill"> 布局 </span>
  
               </div>
  
 
               <div class="blog-card-meta">
  
-                <span class="blog-card-date"> 2025-11-25 </span>
+                <span class="blog-card-date"> 2025-11-23 </span>
  
 
                 <!-- add by js -->
@@ -581,17 +425,17 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
-          <a href=" allay-template/ " class="blog-card">
+          <a href=" allay-template/scope " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
  
-                 Allay 模板 
+                 作用域 
                  
               </h2>
 
  
               <p class="blog-card-excerpt">
- 了解 Allay 模板系统及其语法 
+ Allay 模板系统中的变量作用域 
               </p>
  
 
@@ -602,14 +446,14 @@
  
                 <span class="tag-pill"> 模板 </span>
  
-                <span class="tag-pill"> 主题 </span>
+                <span class="tag-pill"> 作用域 </span>
  
               </div>
  
 
               <div class="blog-card-meta">
  
-                <span class="blog-card-date"> 2025-11-22 </span>
+                <span class="blog-card-date"> 2025-11-24 </span>
  
 
                 <!-- add by js -->
@@ -673,6 +517,140 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
+          <a href=" welcome " class="blog-card">
+            <div class="blog-card-main">
+              <h2 class="blog-card-title">
+ 
+                 欢迎使用 Allay 
+                 
+              </h2>
+
+ 
+              <p class="blog-card-excerpt">
+ 欢迎查阅 Allay 博客引擎的用户文档 
+              </p>
+ 
+
+ 
+              <div class="blog-card-tags">
+ 
+                <span class="tag-pill"> Allay 入门 </span>
+ 
+                <span class="tag-pill"> 用户文档 </span>
+ 
+              </div>
+ 
+
+              <div class="blog-card-meta">
+ 
+                <span class="blog-card-date"> 2025-11-19 </span>
+ 
+
+                <!-- add by js -->
+                <!-- <span class="blog-card-sep">·</span> -->
+                <!-- <span class="blog-card-read"></span> -->
+
+ 
+
+ 
+                <div data-group=" 快速开始 "></div>
+ 
+              </div>
+            </div>
+
+            <div class="blog-card-arrow">➜</div>
+          </a>
+ 
+          <a href=" custom-contents/front-matter " class="blog-card">
+            <div class="blog-card-main">
+              <h2 class="blog-card-title">
+ 
+                 自定义前置元数据 
+                 
+              </h2>
+
+ 
+              <p class="blog-card-excerpt">
+ 使用自定义前置元数据（front matter） 
+              </p>
+ 
+
+ 
+              <div class="blog-card-tags">
+ 
+                <span class="tag-pill"> Allay 内容 </span>
+ 
+                <span class="tag-pill"> Front-matter </span>
+ 
+              </div>
+ 
+
+              <div class="blog-card-meta">
+ 
+                <span class="blog-card-date"> 2025-11-24 </span>
+ 
+
+                <!-- add by js -->
+                <!-- <span class="blog-card-sep">·</span> -->
+                <!-- <span class="blog-card-read"></span> -->
+
+ 
+
+ 
+                <div data-group=" 自定义内容 "></div>
+ 
+              </div>
+            </div>
+
+            <div class="blog-card-arrow">➜</div>
+          </a>
+ 
+          <a href=" allay-template/ " class="blog-card">
+            <div class="blog-card-main">
+              <h2 class="blog-card-title">
+ 
+                 Allay 模板 
+                 
+              </h2>
+
+ 
+              <p class="blog-card-excerpt">
+ 了解 Allay 模板系统及其语法 
+              </p>
+ 
+
+ 
+              <div class="blog-card-tags">
+ 
+                <span class="tag-pill"> Allay 功能 </span>
+ 
+                <span class="tag-pill"> 模板 </span>
+ 
+                <span class="tag-pill"> 主题 </span>
+ 
+              </div>
+ 
+
+              <div class="blog-card-meta">
+ 
+                <span class="blog-card-date"> 2025-11-22 </span>
+ 
+
+                <!-- add by js -->
+                <!-- <span class="blog-card-sep">·</span> -->
+                <!-- <span class="blog-card-read"></span> -->
+
+ 
+
+ 
+                <div data-group=" Allay 模板 "></div>
+ 
+              </div>
+            </div>
+
+            <div class="blog-card-arrow">➜</div>
+          </a>
+ 
           <a href=" getting-started/file-structure " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
@@ -719,35 +697,35 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
-          <a href=" getting-started/ " class="blog-card">
+          <a href=" allay-template/practice " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
  
-                 安装与使用 
+                 Allay 模板实战 
                  
               </h2>
 
  
               <p class="blog-card-excerpt">
- 你的 Allay 旅程，从这里开始！ 
+ 通过实战示例学习 Allay 模板系统的综合应用 
               </p>
  
 
  
               <div class="blog-card-tags">
  
-                <span class="tag-pill"> Allay 入门 </span>
+                <span class="tag-pill"> Allay 功能 </span>
  
-                <span class="tag-pill"> 安装指南 </span>
+                <span class="tag-pill"> 模板 </span>
  
-                <span class="tag-pill"> 快速开始 </span>
+                <span class="tag-pill"> 实战 </span>
  
               </div>
  
 
               <div class="blog-card-meta">
  
-                <span class="blog-card-date"> 2025-11-20 </span>
+                <span class="blog-card-date"> 2025-11-25 </span>
  
 
                 <!-- add by js -->
@@ -757,7 +735,7 @@
  
 
  
-                <div data-group=" 快速开始 "></div>
+                <div data-group=" Allay 模板 "></div>
  
               </div>
             </div>
@@ -765,33 +743,35 @@
             <div class="blog-card-arrow">➜</div>
           </a>
  
-          <a href=" welcome " class="blog-card">
+          <a href=" extra-functions/shortcode " class="blog-card">
             <div class="blog-card-main">
               <h2 class="blog-card-title">
  
-                 欢迎使用 Allay 
+                 短代码 
                  
               </h2>
 
  
               <p class="blog-card-excerpt">
- 欢迎查阅 Allay 博客引擎的用户文档 
+ 了解如何在 Allay 博客中使用短代码来增强内容的动态性和可复用性 
               </p>
  
 
  
               <div class="blog-card-tags">
  
-                <span class="tag-pill"> Allay 入门 </span>
+                <span class="tag-pill"> Allay 功能 </span>
  
-                <span class="tag-pill"> 用户文档 </span>
+                <span class="tag-pill"> 短代码 </span>
+ 
+                <span class="tag-pill"> 内容增强 </span>
  
               </div>
  
 
               <div class="blog-card-meta">
  
-                <span class="blog-card-date"> 2025-11-19 </span>
+                <span class="blog-card-date"> 2025-11-24 </span>
  
 
                 <!-- add by js -->
@@ -801,7 +781,7 @@
  
 
  
-                <div data-group=" 快速开始 "></div>
+                <div data-group=" 额外功能 "></div>
  
               </div>
             </div>

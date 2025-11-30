@@ -6,40 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Building the Future of Static Blogging. </title>
 
-    <script>
-        document.addEventListener('load', function () {
-            let pairs = [
-                ['a', 'href'],
-                ['link', 'href'],
-                ['script', 'src'],
-                ['img', 'src'],
-                ['source', 'src'],
-                ['video', 'src'],
-                ['audio', 'src']
-                ['iframe', 'src']
-            ]
-
-
-            pairs.forEach(([tag, attr]) => {
-                document.querySelectorAll(tag).forEach(element => {
-                    let link = element.getAttribute(attr);
-                    if (link && link.startsWith('/')) {
-                        element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
-                    }
-                });
-            });
-        });
-    </script>
-
-    <link rel="stylesheet" href="/css/base.css" />
-</head> 
-
-<head>
-    <link rel="stylesheet" href="/css/about.css" />
+    <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
+    <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
 </head>
 
 <body>
-  <link rel="stylesheet" href="/css/nav.css" />
+    <div id="site-meta" data-base=" https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ "></div>
+</body> 
+
+<head>
+    <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/about.css" />
+</head>
+
+<body>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
 
 <header class="header" id="header">
     <nav class="nav container">
@@ -48,10 +28,10 @@
         </a>
 
         <ul class="nav-menu">
-            <li><a href="/" class="nav-link">首页</a></li>
-            <li><a href="/blog" class="nav-link">博客</a></li>
-            <li><a href="/about" class="nav-link">关于</a></li>
-            <li><a href="/contact" class="nav-link">联系</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/" class="nav-link">首页</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/blog" class="nav-link">博客</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
+            <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
 
  
@@ -84,7 +64,7 @@
     <main class="main">
         <div class="container">
             <h1>关于我</h1>
-  <link rel="stylesheet" href="/css/article.css" />
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/article.css" />
 <article class="article fade-in">
     <header class="article-header">
  
@@ -179,7 +159,7 @@ cd &lt;my-blog-name&gt;
     </div>
 </footer>
 
-<script src="/js/script.js"></script> 
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/script.js"></script> 
 </body>
 
 <script>

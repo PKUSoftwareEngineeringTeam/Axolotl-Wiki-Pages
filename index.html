@@ -6,36 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Axolotl Wiki </title>
 
-    <script>
-        document.addEventListener('load', function () {
-            let pairs = [
-                ['a', 'href'],
-                ['link', 'href'],
-                ['script', 'src'],
-                ['img', 'src'],
-                ['source', 'src'],
-                ['video', 'src'],
-                ['audio', 'src']
-                ['iframe', 'src']
-            ]
+    <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
+    <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+</head>
 
+<body>
+    <div id="site-meta" data-base=" https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ "></div>
+</body> 
 
-            pairs.forEach(([tag, attr]) => {
-                document.querySelectorAll(tag).forEach(element => {
-                    let link = element.getAttribute(attr);
-                    if (link && link.startsWith('/')) {
-                        element.setAttribute(attr, " https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/ ".trim() + link.substring(1));
-                    }
-                });
-            });
-        });
-    </script>
-
-    <link rel="stylesheet" href="/css/base.css" />
-</head> 
-
-<link rel="stylesheet" href="/css/index.css" />
-<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/index.css" />
+<link rel="icon" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/favicon.ico">
 
 <body>
     <header class="header">
@@ -45,10 +25,10 @@
             </a>
 
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link">首页</a></li>
-                <li><a href="/blog" class="nav-link">博客</a></li>
-                <li><a href="/about" class="nav-link">关于</a></li>
-                <li><a href="/contact" class="nav-link">联系</a></li>
+                <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/" class="nav-link">首页</a></li>
+                <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/blog" class="nav-link">博客</a></li>
+                <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
+                <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
             </ul>
         </nav>
     </header>
@@ -65,14 +45,14 @@
  
 
         <div class="buttons-container">
-            <a href="/blog" class="floating-btn btn-1">博客</a>
-            <a href="/about" class="floating-btn btn-2">关于</a>
-            <a href="/contact" class="floating-btn btn-3">联系</a>
+            <a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/blog" class="floating-btn btn-1">博客</a>
+            <a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="floating-btn btn-2">关于</a>
+            <a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="floating-btn btn-3">联系</a>
             <a href="https://github.com/PKUSoftwareEngineeringTeam" class="floating-btn btn-4">了解Allay</a>
         </div>
     </div>
 
-    <script src="/js/index.js"></script>
+    <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/index.js"></script>
 </body>
 
 <script>
