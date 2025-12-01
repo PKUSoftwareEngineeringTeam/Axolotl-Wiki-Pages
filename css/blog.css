@@ -2,14 +2,18 @@
     display: flex;
     gap: 2rem;
     margin: 0 auto;
-    padding: 0;
-    padding-right: 1.5rem;
+    padding: 0 4rem;
     box-sizing: border-box;
 }
 
 .main-content {
     flex: 1;
-    margin-right: 2rem;
+}
+
+.blog-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .blog-card {
@@ -169,7 +173,7 @@
 
     .blog-card:hover .blog-card-arrow {
         width: 100%;
-        height: 60px;
+        height: 50px;
     }
 }
 
@@ -178,7 +182,10 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 2rem;
-    margin: 1rem 0;
+}
+
+section.blog-header {
+    margin: 2rem 0;
 }
 
 .blog-header-main {
@@ -188,7 +195,7 @@
 }
 
 .blog-title-en {
-    margin: 1rem 0;
+    margin: 0;
     font-size: 2.4rem;
     font-weight: 700;
     letter-spacing: 0.03em;
@@ -200,30 +207,119 @@
     opacity: 0.7;
 }
 
-.blog-header-link {
-    align-self: center;
-    font-size: 0.9rem;
-    white-space: nowrap;
-    padding: 0.35rem 0.9rem;
-    border-radius: 999px;
-    background: rgba(15, 23, 42, 0.04);
-    text-decoration: none;
+.blog-search-container {
+    margin: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
 }
 
-.blog-header-link:hover {
-    background: rgba(15, 23, 42, 0.08);
-    text-decoration: none;
+.blog-search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    padding: 8px 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #e1e5e9;
+}
+
+.blog-search-form:focus-within {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-color: #3498db;
+}
+
+.blog-search-input {
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 1rem;
+    width: 0;
+    opacity: 0;
+    width: 100px;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.blog-search-form.active .blog-search-input {
+    width: 250px;
+    opacity: 1;
+}
+
+.blog-search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7f8c8d;
+    transition: color 0.2s ease;
+}
+
+.blog-search-button:hover {
+    color: #3498db;
+}
+
+.search-clear-button {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.search-clear-button:hover {
+    color: #ff4757;
+}
+
+.search-clear-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
 }
 
 @media (max-width: 768px) {
     .blog-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
     }
 
-    .blog-header-link {
-        align-self: flex-start;
+    .blog-search-container {
+        width: 100%;
+    }
+
+    .blog-search-form {
+        width: 100%;
+    }
+
+    .blog-search-form.active .blog-search-input {
+        width: 100%;
+    }
+
+    .blog-search-button {
+        position: absolute;
+        right: 15px;
+    }
+
+    .search-clear-button {
+        right: 45px;
     }
 }
 
@@ -272,12 +368,6 @@
     color: #555;
 }
 
-.blog-group-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .no-group-section {
     margin-top: 2rem;
 }
@@ -288,4 +378,56 @@
     margin-bottom: 1.5rem;
     color: #666;
     padding-left: 0.5rem;
+}
+
+.search-highlight {
+    background-color: rgba(255, 215, 0, 0.3);
+    border-radius: 3px;
+    padding: 0 2px;
+    font-weight: bold;
+    color: #333;
+}
+
+.no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f5f5ff;
+    border-radius: 12px;
+    margin: 2rem 0;
+}
+
+.no-results-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.no-results-icon {
+    width: 64px;
+    height: 64px;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.no-results-message h3 {
+    color: #343a40;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.no-results-message p {
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+}
+
+.no-results-message strong {
+    color: #e83e8c;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .no-results-message {
+        padding: 2rem 1rem;
+    }
 }

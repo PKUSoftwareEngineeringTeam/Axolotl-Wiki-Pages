@@ -46,7 +46,7 @@ function organizeBlogPosts() {
         groupContainer.appendChild(groupHeader);
 
         const groupList = document.createElement('div');
-        groupList.className = 'blog-group-list';
+        groupList.className = 'blog-list';
 
         groupedCards[groupName].forEach(card => {
             groupList.appendChild(card);
@@ -84,4 +84,137 @@ function organizeBlogPosts() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', organizeBlogPosts);
+function performSearch(query) {
+    const blogCards = document.querySelectorAll('.blog-card');
+    let hasResults = false;
+
+    const existingNoResults = document.querySelector('.no-results-message');
+    existingNoResults.style.display = 'none';
+
+    if (!query.trim()) {
+        blogCards.forEach(card => {
+            card.style.display = 'flex';
+        });
+        return;
+    }
+
+    const lowerQuery = query.toLowerCase().trim();
+    blogCards.forEach(card => {
+        const title = card.querySelector('.blog-card-title').textContent.toLowerCase();
+        const excerpt = card.querySelector('.blog-card-excerpt').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.tag-pill'))
+            .map(tag => tag.textContent.toLowerCase())
+            .join(' ');
+
+        const matches = title.includes(lowerQuery) ||
+            excerpt.includes(lowerQuery) ||
+            tags.includes(lowerQuery);
+
+        if (matches) {
+            card.style.display = 'flex';
+            hasResults = true;
+
+            highlightText(card, lowerQuery);
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    if (!hasResults) {
+        existingNoResults.style.display = 'block';
+        const queryElement = document.getElementById('search-query');
+        queryElement.textContent = query;
+    }
+}
+
+function highlightText(element, query) {
+    const highlights = element.querySelectorAll('.search-highlight');
+    highlights.forEach(highlight => {
+        const parent = highlight.parentNode;
+        parent.replaceChild(document.createTextNode(highlight.textContent), highlight);
+        parent.normalize();
+    });
+
+    if (query.length < 2) return;
+
+    highlightElement(element.querySelector('.blog-card-title'), query);
+    highlightElement(element.querySelector('.blog-card-excerpt'), query);
+}
+
+function highlightElement(element, query) {
+    if (!element) return;
+
+    const text = element.textContent;
+    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+
+    if (regex.test(text)) {
+        const newHTML = text.replace(regex, '<span class="search-highlight">$1</span>');
+        element.innerHTML = newHTML;
+    }
+}
+
+function initSearch() {
+    const searchForm = document.getElementById('blog-search-form');
+    const searchInput = document.getElementById('blog-search-input');
+    const searchButton = document.getElementById('blog-search-button');
+
+    let searchTimeout;
+    searchInput.addEventListener('input', function () {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            performSearch(this.value);
+        }, 300);
+    });
+
+    searchButton.addEventListener('click', function () {
+        const query = searchInput.value.trim();
+        performSearch(query);
+
+        if (window.innerWidth < 768) {
+            searchInput.blur();
+        }
+    });
+
+    searchForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const query = searchInput.value.trim();
+        performSearch(query);
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!searchForm.contains(e.target)) {
+            searchForm.classList.remove('active');
+        }
+    });
+
+    searchInput.addEventListener('focus', function () {
+        searchForm.classList.add('active');
+    });
+
+    searchInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            this.value = '';
+            performSearch('');
+            this.blur();
+            searchForm.classList.remove('active');
+        }
+    });
+
+    const clearButton = document.getElementById('search-clear-button');
+
+    clearButton.addEventListener('click', function () {
+        searchInput.value = '';
+        performSearch('');
+        searchInput.focus();
+        this.style.display = 'none';
+    });
+
+    searchInput.addEventListener('input', function () {
+        clearButton.style.display = this.value ? 'block' : 'none';
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    initSearch();
+    organizeBlogPosts();
+});
