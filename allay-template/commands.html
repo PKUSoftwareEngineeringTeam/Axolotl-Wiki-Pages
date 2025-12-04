@@ -4,13 +4,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> 模板指令 </title>
+    <title> 指令 </title>
 
     <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- use hljs for code highlighting -->
-    <link href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/github.min.css" rel="stylesheet" type="text/css">
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/highlight.min.js"></script>
     <script>
         hljs.highlightAll();
@@ -24,9 +24,10 @@
 
 <body>
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/nav.js" defer></script>
 
 <header class="header" id="header">
-    <nav class="nav container">
+    <nav class="nav nav-container">
         <a href="" class="nav-brand">
             <span class="axolotl-gradient"> Axolotl Wiki </span>
         </a>
@@ -37,6 +38,18 @@
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
+
+        <div class="theme-toggle-container">
+            <label class="theme-toggle-label" for="theme-toggle">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="theme-toggle" class="toggle-input">
+                    <div class="toggle-slider">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </div>
+                </div>
+            </label>
+        </div>
 
  
         <a href=" https://github.com/PKUSoftwareEngineeringTeam/Axolotl-Wiki " class="github-corner" aria-label="View source on GitHub">
@@ -52,25 +65,14 @@
         </a>
  
     </nav>
-</header>
-
-<script>
-    window.addEventListener('scroll', function () {
-        const header = document.getElementById('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script> 
+</header> 
   <main class="main">
     <div class="container">
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/article.css" />
 <article class="article fade-in">
     <header class="article-header">
  
-        <h1 class="article-title"> 模板指令 </h1>
+        <h1 class="article-title"> 指令 </h1>
  
 
  
@@ -85,7 +87,8 @@
 <li><code>{- -}</code>：命令块，用于控制流程</li>
 <li><code>{: :}</code>：表达式块，用于输出内容</li>
 <li><code>{&lt; &gt;}</code>：短代码块，用于扩展功能</li>
-<li><code>{{ }}</code>：不转义文本块，用于原样输出</li>
+<li><code>{% %}</code>：注释块，用于添加注释</li>
+<li><code>{{ }}</code>：不转义文本块，用于原样输出。也可以在 <a href="../custom-contents/front-matter">front-matter</a> 添加字段 <code>raw: true</code> 来禁用整个文件的转义。</li>
 </ul>
 <p>所有表达式块都会被求值并替换为其结果。</p>
 <h2>变量和表达式</h2>
@@ -141,11 +144,6 @@
     &lt;li&gt;{: $index + 1 :}. {: $product.name :}&lt;/li&gt;
     {- end -}
 &lt;/ol&gt;
-
-&lt;!-- 遍历对象字段 --&gt;
-{- for $key, $value: .settings -}
-&lt;p&gt;{: $key :}: {: $value :}&lt;/p&gt;
-{- end -}
 </code></pre>
 <h3><code>if</code> / <code>else</code> - 条件判断</h3>
 <p>根据条件渲染不同内容。</p>
@@ -180,22 +178,19 @@
 &lt;p&gt;邮箱: {: .email :}&lt;/p&gt;
 {- end -}
 
-&lt;!-- 安全使用（对象可能为空） --&gt;
-{- with .optional_content || {} -}
-&lt;div&gt;{: .text :}&lt;/div&gt;
+&lt;!-- 如果 with 对象不存在，则跳过渲染 --&gt;
+{- with .not_exist_field -}
+&lt;p&gt;不会渲染此内容&lt;/p&gt;
 {- end -}
 </code></pre>
 <h2>模板组织和复用</h2>
 <h3><code>include</code> - 模板包含</h3>
-<p>包含其他模板文件，支持参数传递。</p>
+<p>包含其他模板文件，支持参数传递。<code>include</code> 默认在主题的 <code>templates</code> 目录下查找模板文件，<code>.html</code> 后缀可省略。有关作用域的传递，请参看 <a href="./scope">作用域</a>。</p>
 <pre><code class="language-html">&lt;!-- 包含头部模板，使用当前作用域 --&gt;
 {- include "header.html" -}
 
 &lt;!-- 包含文章模板，传递特定作用域和参数 --&gt;
-{- include "components/article.html" .current_article "特色文章" -}
-
-&lt;!-- 包含侧边栏，不传递作用域（使用当前作用域） --&gt;
-{- include "sidebar.html" -}
+{- include "components/article" .current_article "特色文章" -}
 </code></pre>
 <p>在被包含的模板中，使用 <code>param</code> 访问传递的参数：</p>
 <pre><code class="language-html">&lt;!-- components/article.html --&gt;
@@ -206,18 +201,7 @@
 &lt;/article&gt;
 </code></pre>
 <h3>短代码系统</h3>
-<p>短代码用于扩展模板功能，支持单标签和块级用法。</p>
-<pre><code class="language-html">&lt;!-- 单标签短代码 --&gt;
-{&lt; image src="photo.jpg" alt="描述" /&gt;}
-
-&lt;!-- 块级短代码 --&gt;
-{&lt; panel title="提示" &gt;}
-这是一个重要的提示信息。
-{&lt;/ panel &gt;}
-
-&lt;!-- 带参数的短代码 --&gt;
-{&lt; embed url=$video_url autoplay=true /&gt;}
-</code></pre>
+<p>短代码与 <code>include</code> 功能类似。用于扩展模板功能，请参看 <a href="../extra-functions/shortcode">短代码</a>。</p>
 <h2>特殊变量和作用域</h2>
 <h3>内置变量</h3>
 <pre><code class="language-html">{: this :}        &lt;!-- 当前作用域对象 --&gt;
@@ -242,107 +226,6 @@
     {- set $temp = .name -} &lt;!-- 不影响原对象 --&gt;
 {- end -}
 </code></pre>
-<h2>实用技巧和最佳实践</h2>
-<h3>1. 安全访问嵌套字段</h3>
-<pre><code class="language-html">&lt;!-- 安全的方式访问可能不存在的字段 --&gt;
-{- with .user || {} -}
-{: .profile?.avatar || "default.jpg" :}
-{- end -}
-</code></pre>
-<h3>2. 使用默认值</h3>
-<pre><code class="language-html">{: $username || "匿名用户" :}
-{: .description || "暂无描述" :}
-</code></pre>
-<h3>3. 条件包含模板</h3>
-<pre><code class="language-html">{- if .show_sidebar -}
-{- include "sidebar.html" -}
-{- end -}
-</code></pre>
-<h3>4. 循环中的状态判断</h3>
-<pre><code class="language-html">{- for $item, $index: .items -}
-{- if $index == 0 -}
-&lt;li class="first"&gt;{: $item :}&lt;/li&gt;
-{- else if $index == count(.items) - 1 -}
-&lt;li class="last"&gt;{: $item :}&lt;/li&gt;
-{- else -}
-&lt;li&gt;{: $item :}&lt;/li&gt;
-{- end -}
-{- end -}
-</code></pre>
-<h3>5. 模板注释</h3>
-<pre><code class="language-html">{- 这是单行注释 -}
-
-{-
-  这是多行注释
-  不会在最终输出中显示
--}
-</code></pre>
-<h2>错误处理</h2>
-<h3>常见错误及解决</h3>
-<pre><code class="language-html">&lt;!-- 错误：变量不存在 --&gt;
-{: $undefined_var :} &lt;!-- 会抛出错误 --&gt;
-
-&lt;!-- 正确：使用默认值 --&gt;
-{: $undefined_var || "默认值" :}
-
-&lt;!-- 错误：除零 --&gt;
-{: 10 / 0 :} &lt;!-- 会抛出错误 --&gt;
-
-&lt;!-- 正确：安全检查 --&gt;
-{- if $divisor != 0 -}{: 10 / $divisor :}{- end -}
-</code></pre>
-<p>如果你想要更详细的说明，以下是博客引擎支持的所有语法规则的参考表格：</p>
-<h2>基本语法结构</h2>
-<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
-<tr><td><strong>文件结构</strong></td><td>文件</td><td><code>SOI ~ (yaml_front_matter | toml_front_matter)? ~ template ~ EOI</code></td><td>完整文件结构，包含可选的元数据和模板内容</td><td>-</td></tr>
-<tr><td><strong>元数据</strong></td><td>YAML 前置元数据</td><td><code>---\n</code> + 内容 + <code>---\n</code></td><td>使用 YAML 格式的元数据块</td><td><code>---\ntitle: 示例\n---</code></td></tr>
-<tr><td></td><td>TOML 前置元数据</td><td><code>+++\n</code> + 内容 + <code>+++\n</code></td><td>使用 TOML 格式的元数据块</td><td><code>+++\ntitle = "示例"\n+++</code></td></tr>
-</tbody></table>
-<h2>模板控制结构</h2>
-<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
-<tr><td><strong>文本处理</strong></td><td>普通文本</td><td><code>(!("{-" | "{&lt;" | "{:" | "{{") ~ ANY)+</code></td><td>普通文本内容，不包含特殊语法</td><td><code>这是一段普通文本</code></td></tr>
-<tr><td></td><td>不转义文本</td><td><code>{{</code> + 内容 + <code>}}</code></td><td>原样输出内容，不进行转义</td><td><code>{{&lt;html&gt;}}</code> 输出 <code>&lt;html&gt;</code></td></tr>
-<tr><td><strong>变量和表达式</strong></td><td>变量</td><td><code>$</code> + 标识符</td><td>变量引用</td><td><code>$title</code></td></tr>
-<tr><td></td><td>字段访问</td><td>顶级对象 + <code>.</code> + 字段</td><td>访问对象的字段</td><td><code>$user.name</code></td></tr>
-<tr><td></td><td>字符串</td><td><code>"</code> + 内容 + <code>"</code></td><td>字符串字面量</td><td><code>"Hello World"</code></td></tr>
-<tr><td></td><td>布尔值</td><td><code>#t</code> 或 <code>#f</code></td><td>布尔值字面量</td><td><code>#t</code> (true), <code>#f</code> (false)</td></tr>
-<tr><td></td><td>空值</td><td><code>null</code></td><td>空值字面量</td><td><code>null</code></td></tr>
-<tr><td></td><td>数字</td><td>数字序列</td><td>数字字面量</td><td><code>123</code>, <code>45.67</code></td></tr>
-</tbody></table>
-<h2>控制命令</h2>
-<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
-<tr><td><strong>变量设置</strong></td><td>set 命令</td><td><code>{- set 变量 = 表达式 -}</code></td><td>设置变量值</td><td><code>{- set $name = "John" -}</code></td></tr>
-<tr><td><strong>循环控制</strong></td><td>for 循环</td><td><code>{- for 变量[,变量] : 表达式 -}</code> + 内容 + <code>{- end -}</code></td><td>遍历集合</td><td><code>{- for $item : $list -}{$item}{- end -}</code></td></tr>
-<tr><td><strong>条件控制</strong></td><td>if 条件</td><td><code>{- if 表达式 -}</code> + 内容 + (<code>{- else -}</code> + 内容)? + <code>{- end -}</code></td><td>条件判断</td><td><code>{- if $show -}显示内容{- end -}</code></td></tr>
-<tr><td><strong>作用域控制</strong></td><td>with 块</td><td><code>{- with 表达式 -}</code> + 内容 + <code>{- end -}</code></td><td>创建新的作用域</td><td><code>{- with $user -}{.name}{- end -}</code></td></tr>
-<tr><td><strong>文件包含</strong></td><td>include 命令</td><td><code>{- include "文件名" 参数... -}</code></td><td>包含其他模板文件</td><td><code>{- include "header.html" -}</code></td></tr>
-</tbody></table>
-<h2>短代码系统</h2>
-<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
-<tr><td><strong>短代码</strong></td><td>单标签短代码</td><td><code>{&lt; 名称 参数... /&gt;}</code></td><td>自闭合的短代码</td><td><code>{&lt; image src="pic.jpg" /&gt;}</code></td></tr>
-<tr><td></td><td>块级短代码</td><td><code>{&lt; 名称 参数... &gt;}</code> + 内容 + <code>{&lt;/ 名称 &gt;}</code></td><td>包含内容的短代码</td><td><code>{&lt; panel &gt;}内容{&lt;/ panel &gt;}</code></td></tr>
-</tbody></table>
-<h2>内容替换</h2>
-<table><thead><tr><th>语法类别</th><th>语法名称</th><th>语法格式</th><th>描述</th><th>示例</th></tr></thead><tbody>
-<tr><td><strong>内容替换</strong></td><td>表达式替换</td><td><code>{:</code> + 表达式 + <code>:}</code></td><td>计算并输出表达式结果</td><td><code>{:$a + $b:}</code></td></tr>
-<tr><td></td><td>get 替换</td><td><code>{:</code> + <code>get</code> + 表达式 + <code>:}</code></td><td>显式获取并输出值</td><td><code>{:$user.name:}</code></td></tr>
-</tbody></table>
-<h2>操作符</h2>
-<table><thead><tr><th>操作符类型</th><th>操作符</th><th>描述</th><th>优先级</th></tr></thead><tbody>
-<tr><td><strong>逻辑操作符</strong></td><td><code>&amp;&amp;</code></td><td>逻辑与</td><td>低</td></tr>
-<tr><td></td><td><code>||</code></td><td>逻辑或</td><td>低</td></tr>
-<tr><td><strong>比较操作符</strong></td><td><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></td><td>比较运算</td><td>中</td></tr>
-<tr><td><strong>算术操作符</strong></td><td><code>+</code>, <code>-</code></td><td>加减法</td><td>中</td></tr>
-<tr><td></td><td><code>*</code>, <code>/</code>, <code>%</code></td><td>乘除取模</td><td>高</td></tr>
-<tr><td><strong>一元操作符</strong></td><td><code>!</code>, <code>+</code>, <code>-</code></td><td>逻辑非、正负号</td><td>最高</td></tr>
-</tbody></table>
-<h2>特殊关键字</h2>
-<table><thead><tr><th>关键字</th><th>描述</th></tr></thead><tbody>
-<tr><td><code>this</code></td><td>引用当前上下文对象</td></tr>
-<tr><td><code>param</code></td><td>引用模板参数</td></tr>
-<tr><td><code>site</code></td><td>引用站点全局变量</td></tr>
-<tr><td><code>pages</code></td><td>引用页面集合</td></tr>
-</tbody></table>
  
     </div>
 </article> 
@@ -403,13 +286,22 @@ id="gitalk-data">
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-        <span>© Axolotl Wiki </span>
-        <span>由 Allay & Axolotl 主题驱动</span>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/footer.css" />
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="copyright">© Axolotl Wiki ·  2024 </span>
+                <span class="divider">|</span>
+                <span class="theme-info">由 Allay & Axolotl 主题驱动</span>
+            </div>
+            <div class="footer-right">
+                <span class="footer-note"> Why this name?... Minecraft. </span>
+            </div>
+        </div>
     </div>
-</footer>
- 
+</footer> 
 
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/toc.css" />
   <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/toc.js"></script>

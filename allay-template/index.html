@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- use hljs for code highlighting -->
-    <link href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/github.min.css" rel="stylesheet" type="text/css">
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/highlight.min.js"></script>
     <script>
         hljs.highlightAll();
@@ -24,9 +24,10 @@
 
 <body>
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/nav.js" defer></script>
 
 <header class="header" id="header">
-    <nav class="nav container">
+    <nav class="nav nav-container">
         <a href="" class="nav-brand">
             <span class="axolotl-gradient"> Axolotl Wiki </span>
         </a>
@@ -37,6 +38,18 @@
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
+
+        <div class="theme-toggle-container">
+            <label class="theme-toggle-label" for="theme-toggle">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="theme-toggle" class="toggle-input">
+                    <div class="toggle-slider">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </div>
+                </div>
+            </label>
+        </div>
 
  
         <a href=" https://github.com/PKUSoftwareEngineeringTeam/Axolotl-Wiki " class="github-corner" aria-label="View source on GitHub">
@@ -52,18 +65,7 @@
         </a>
  
     </nav>
-</header>
-
-<script>
-    window.addEventListener('scroll', function () {
-        const header = document.getElementById('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script> 
+</header> 
   <main class="main">
     <div class="container">
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/article.css" />
@@ -80,10 +82,9 @@
 
     <div class="article-content">
  <p>Allay 使用模板系统来定义博客的外观和布局。模板文件通常采用 HTML 格式，并包含特定的占位符，用于动态插入内容。</p>
-<p>如果你仅是博客创作者，通常不需要直接修改模板文件。你可以通过修改配置文件和内容文件来定制博客的外观。</p>
-<p>另外，你也许想要学习一些模板语法，以便在内容中使用自定义短代码或变量。那么下面的章节将对你有所帮助。</p>
+<p>如果你仅是博客创作者，通常不需要直接修改模板文件。你可以通过修改配置文件和内容文件来定制博客的外观。你也许想要学习一些模板语法，以便在内容中使用自定义短代码或变量。那么下面的章节将对你有所帮助。</p>
 <h2>配置文件</h2>
-<p>Allay 模板的配置文件通常命名为 <code>theme.toml</code>，位于主题目录下。该文件定义了主题的基本信息和参数。 例如：</p>
+<p>Allay 模板的配置文件通常命名为 <code>allay.toml</code>。该文件定义了站点的基本信息和参数。例如：</p>
 <pre><code class="language-toml"># Default Allay site configuration
 baseUrl = "http://axolotl.wiki"
 title = "Axolotl Wiki"
@@ -91,9 +92,10 @@ theme = "Axolotl"
 description = "Official Axolotl Wiki"
 author = "Allay Developer"
 [params]
+# 这里的内容会给模板中使用 .site 变量访问
 title = "Allay Blog"
 </code></pre>
-<p>你可以将theme指定为你想使用的主题名称，该主题应位于 <code>themes/</code> 目录下。</p>
+<p>你可以将 theme 指定为你想使用的主题名称，该主题应位于 <code>themes/</code> 目录下。</p>
 <h2>布局</h2>
 <p>所有的 Allay 模板都应放在 <code>templates</code> 目录下。 有些主题会有多个模板文件：</p>
 <ul>
@@ -220,13 +222,22 @@ id="gitalk-data">
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-        <span>© Axolotl Wiki </span>
-        <span>由 Allay & Axolotl 主题驱动</span>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/footer.css" />
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="copyright">© Axolotl Wiki ·  2024 </span>
+                <span class="divider">|</span>
+                <span class="theme-info">由 Allay & Axolotl 主题驱动</span>
+            </div>
+            <div class="footer-right">
+                <span class="footer-note"> Why this name?... Minecraft. </span>
+            </div>
+        </div>
     </div>
-</footer>
- 
+</footer> 
 
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/toc.css" />
   <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/toc.js"></script>

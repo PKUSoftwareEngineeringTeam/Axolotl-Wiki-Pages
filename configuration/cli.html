@@ -4,7 +4,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> 欢迎使用 Allay </title>
+    <title> 命令行工具 </title>
 
     <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
@@ -72,19 +72,50 @@
 <article class="article fade-in">
     <header class="article-header">
  
-        <h1 class="article-title"> 欢迎使用 Allay </h1>
+        <h1 class="article-title"> 命令行工具 </h1>
  
 
  
-        <p class="article-meta">发布日期： 2025-11-19 </p>
+        <p class="article-meta">发布日期： 2025-11-21 </p>
  
     </header>
 
     <div class="article-content">
- <p>欢迎查阅 Allay 博客引擎的用户文档！本指南将帮助您开始设置和使用 Allay，以便创建和管理您的博客。</p>
-<p>“Allay” 的名字来源于 Minecraft 游戏中的生物，象征着简洁和易用，就像 Allay 能够轻松帮助您管理博客一样。</p>
-<p>你可以查看<a href="./getting-started/">快速开始</a>以快速搭建你的第一个 Allay 博客。</p>
-<p>我们的代码仓库托管在 <a href="https://github.com/PKUSoftwareEngineeringTeam/Allay">GitHub</a>。欢迎浏览代码、提交问题或参与项目贡献。</p>
+ <p>allay 命令行工具是管理和构建 Allay 博客的主要方式，并提供了一些自定义选项。以下是常用命令及其说明：</p>
+<pre><code class="language-bash">allay [COMMAND] [OPTIONS]
+</code></pre>
+<h3>全局参数</h3>
+<ul>
+<li><code>-h</code>, <code>--help</code>：显示帮助信息</li>
+<li><code>-V</code>, <code>--version</code>：显示版本信息</li>
+<li><code>-r</code>, <code>--root &lt;PATH&gt;</code>：指定博客根目录，默认为当前目录</li>
+<li><code>--online</code>：启用在线模式，此时会读取 <code>allay.toml</code> 中的 <code>base_url</code> 作为站点根 URL。此特性主要用于处理网站绝对路径 <code>href="/foo/bar</code> 的路由问题。</li>
+</ul>
+<h3>子命令</h3>
+<ul>
+<li>
+<p><code>new/init</code>：创建一个新的 Allay 博客项目</p>
+<pre><code class="language-bash">allay init
+allay new &lt;path&gt;
+</code></pre>
+<p><code>allay init</code> 相当于在当前目录执行 <code>allay new .</code>。默认方式下，CLI 会询问用户是否要自动下载并应用默认主题。如果你希望跳过交互式提示，可以使用 <code>--skip-theme</code> 参数。</p>
+</li>
+<li>
+<p><code>build</code>：构建博客，生成静态文件</p>
+<pre><code class="language-bash">allay build
+</code></pre>
+</li>
+<li>
+<p><code>serve</code>：启动本地开发服务器，支持热重载</p>
+<pre><code class="language-bash">allay serve
+</code></pre>
+<ul>
+<li><code>-p</code>, <code>--port &lt;PORT&gt;</code>：指定服务器端口，默认为 <code>8000</code></li>
+<li><code>-a</code>, <code>--address &lt;ADDRESS&gt;</code>：指定服务器地址，默认为 <code>127.0.0.1</code></li>
+<li><code>--open</code>：启动服务器后自动在浏览器中打开站点</li>
+</ul>
+</li>
+</ul>
  
     </div>
 </article> 

@@ -125,16 +125,19 @@ function colorizeTagPills() {
     });
 }
 
+function workspace(path) {
+    const siteMeta = document.getElementById('site-meta');
+    const baseUrl = siteMeta ? siteMeta.getAttribute('data-base') || '' : '';
+    return baseUrl.trim() + path;
+}
 
 /**
  * Fetch the site map JSON file.
  */
 async function fetchSiteMap() {
-    const siteMeta = document.getElementById('site-meta');
-    const baseUrl = siteMeta ? siteMeta.getAttribute('data-base') || '' : '';
-    const siteMap = "sitemap.json";
+    const siteMap = workspace("sitemap.json");
     try {
-        const response = await fetch(baseUrl.trim() + siteMap);
+        const response = await fetch(siteMap);
         if (!response.ok) {
             console.error('Failed to fetch sitemap:', response.statusText);
             return null;
@@ -145,4 +148,16 @@ async function fetchSiteMap() {
         console.error('Error fetching sitemap:', error);
         return null;
     }
+}
+
+/**
+ * Toggle the theme between light and dark.
+ */
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
 }

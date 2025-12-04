@@ -22,5 +22,5 @@
 .error-text {
     margin: 0 0 1.8rem;
     font-size: 0.98rem;
-    color: var(--fg-muted);
+    color: var(--gray-5);
 }

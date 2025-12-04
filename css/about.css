@@ -5,11 +5,11 @@
 }
 
 .friends-title {
-    color: #333;
+    color: var(--gray-8);
     font-size: 1.5em;
     margin-bottom: 15px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid var(--gray-3);
 }
 
 .friends-list {
@@ -21,16 +21,25 @@
 .friend-block {
     display: block;
     padding: 12px 15px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--gray-3);
     border-radius: 6px;
-    background-color: #f9f9f9;
+    background-color: var(--gray-1);
     transition: all 0.3s ease;
     text-decoration: none;
 }
 
+.friend-block a {
+    border-bottom: none;
+}
+
+.friend-block a:hover {
+    text-decoration: none;
+    background: none;
+}
+
 .friend-block:hover {
-    background-color: #f0f8ff;
-    border-color: #4dabf7;
+    background-color: var(--gray-2);
+    border-color: var(--arcoblue-6);
     transform: translateY(-2px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -39,18 +48,18 @@
     display: block;
     font-size: 1.1em;
     font-weight: bold;
-    color: #1971c2;
+    color: var(--blue-6);
     text-decoration: none;
     margin-bottom: 5px;
 }
 
 .friend-link:hover {
-    color: #1864ab;
+    color: var(--blue-7);
 }
 
 .friend-intro {
     margin: 0;
     font-size: 0.9em;
-    color: #666;
+    color: var(--gray-6);
     line-height: 1.4;
 }

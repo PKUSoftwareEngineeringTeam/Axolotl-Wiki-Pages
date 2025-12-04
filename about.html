@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- use hljs for code highlighting -->
-    <link href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/github.min.css" rel="stylesheet" type="text/css">
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/highlight.min.js"></script>
     <script>
         hljs.highlightAll();
@@ -27,9 +27,10 @@
 
 <body>
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/nav.js" defer></script>
 
 <header class="header" id="header">
-    <nav class="nav container">
+    <nav class="nav nav-container">
         <a href="" class="nav-brand">
             <span class="axolotl-gradient"> Axolotl Wiki </span>
         </a>
@@ -40,6 +41,18 @@
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
+
+        <div class="theme-toggle-container">
+            <label class="theme-toggle-label" for="theme-toggle">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="theme-toggle" class="toggle-input">
+                    <div class="toggle-slider">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </div>
+                </div>
+            </label>
+        </div>
 
  
         <a href=" https://github.com/PKUSoftwareEngineeringTeam/Axolotl-Wiki " class="github-corner" aria-label="View source on GitHub">
@@ -55,18 +68,7 @@
         </a>
  
     </nav>
-</header>
-
-<script>
-    window.addEventListener('scroll', function () {
-        const header = document.getElementById('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script> 
+</header> 
 
     <main class="main">
         <div class="container">
@@ -159,13 +161,22 @@ cd &lt;my-blog-name&gt;
         </div>
     </main>
 
-  <footer class="site-footer">
-    <div class="container">
-        <span>© Axolotl Wiki </span>
-        <span>由 Allay & Axolotl 主题驱动</span>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/footer.css" />
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="copyright">© Axolotl Wiki ·  2024 </span>
+                <span class="divider">|</span>
+                <span class="theme-info">由 Allay & Axolotl 主题驱动</span>
+            </div>
+            <div class="footer-right">
+                <span class="footer-note"> Why this name?... Minecraft. </span>
+            </div>
+        </div>
     </div>
-</footer>
- 
+</footer> 
 </body>
 
 <script>

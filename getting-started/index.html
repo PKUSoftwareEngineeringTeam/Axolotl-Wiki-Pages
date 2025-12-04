@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/base.css" />
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/base.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- use hljs for code highlighting -->
-    <link href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/github.min.css" rel="stylesheet" type="text/css">
     <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/highlight.min.js"></script>
     <script>
         hljs.highlightAll();
@@ -24,9 +24,10 @@
 
 <body>
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/nav.css" />
+<script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/nav.js" defer></script>
 
 <header class="header" id="header">
-    <nav class="nav container">
+    <nav class="nav nav-container">
         <a href="" class="nav-brand">
             <span class="axolotl-gradient"> Axolotl Wiki </span>
         </a>
@@ -37,6 +38,18 @@
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/about" class="nav-link">关于</a></li>
             <li><a href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/contact" class="nav-link">联系</a></li>
         </ul>
+
+        <div class="theme-toggle-container">
+            <label class="theme-toggle-label" for="theme-toggle">
+                <div class="toggle-wrapper">
+                    <input type="checkbox" id="theme-toggle" class="toggle-input">
+                    <div class="toggle-slider">
+                        <i class="fas fa-sun icon-sun"></i>
+                        <i class="fas fa-moon icon-moon"></i>
+                    </div>
+                </div>
+            </label>
+        </div>
 
  
         <a href=" https://github.com/PKUSoftwareEngineeringTeam/Axolotl-Wiki " class="github-corner" aria-label="View source on GitHub">
@@ -52,18 +65,7 @@
         </a>
  
     </nav>
-</header>
-
-<script>
-    window.addEventListener('scroll', function () {
-        const header = document.getElementById('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-</script> 
+</header> 
   <main class="main">
     <div class="container">
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/article.css" />
@@ -84,7 +86,7 @@
 <p>首先，你需要安装 Allay。你可以通过以下两种方式获取：</p>
 <ol>
 <li>
-<p><strong>下载预编译版本（推荐）</strong>：访问我们的 <a href="https://github.com/PKUSoftwareEngineeringTeam/Allay/releases">https://github.com/PKUSoftwareEngineeringTeam/Allay/releases</a> 获取最新的预编译二进制文件</p>
+<p><strong>下载预编译版本</strong>：访问我们的 <a href="https://github.com/PKUSoftwareEngineeringTeam/Allay/releases">发布页面</a> 获取最新的预编译二进制文件</p>
 </li>
 <li>
 <p><strong>从源码构建</strong>：</p>
@@ -101,11 +103,10 @@ cargo build --release
 </li>
 </ol>
 <p>建议将可执行文件添加到系统 PATH 中以便全局使用。</p>
-<h2>安装allay插件</h2>
-<p>如果你使用的是vscode编辑器，强烈建议安装allay插件以获得更好的编辑体验。请按照以下步骤操作：</p>
-<h3>（Todo）</h3>
+<h2>安装 vscode 插件</h2>
+<p>如果你使用的是 vscode 编辑器，你可以安装 <a href="https://github.com/PKUSoftwareEngineeringTeam/Allay_vscode">allay-vscode</a> 插件以获得更好的编辑体验。</p>
 <h2>初始化</h2>
-<p>现在，在命令行新建一个文件夹存放你的博客，然后输入</p>
+<p>现在，在命令行新建一个文件夹存放你的博客，然后执行</p>
 <pre><code class="language-sh">allay new
 allay init
 </code></pre>
@@ -129,14 +130,21 @@ git clone https://github.com/PKUSoftwareEngineeringTeam/Axolotl.git
 <h2>启动本地服务器</h2>
 <p>好了，万事具备！让我们启动allay引擎！</p>
 <p>进入你的博客目录，运行以下命令启动本地开发服务器：</p>
-<pre><code class="language-sh">allay server
+<pre><code class="language-sh">allay serve
 </code></pre>
 <p>我们的本地服务器现已启动！</p>
+<p>这将：</p>
+<ul>
+<li>在 <code>public/</code> 目录生成静态文件</li>
+<li>启动本地服务器（默认地址：<code>http://localhost:8000</code>）</li>
+<li>由于我们提供了热重载机制, 自动检测文件的更改并实时更新</li>
+</ul>
+<p>如果端口 8000 已被占用，你可以通过配置指定其他端口。</p>
 <p>当然，如果你已经安装了vscode插件，你可以点击右上角的眼睛图标，直接在vscode中启动本地服务器，并预览博客效果。</p>
 <h2>开始创作</h2>
 <p>现在你可以：</p>
 <ol>
-<li>在 <code>content/</code> 目录中创建 Markdown 文件来编写博客内容</li>
+<li>在 <code>contents/</code> 目录中创建 Markdown 文件来编写博客内容</li>
 <li>将图片等静态资源放入 <code>static/</code> 目录</li>
 <li>通过修改 <code>allay.toml</code> 文件来自定义博客配置</li>
 <li>在浏览器/vscode中查看实时更新</li>
@@ -206,13 +214,22 @@ id="gitalk-data">
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-        <span>© Axolotl Wiki </span>
-        <span>由 Allay & Axolotl 主题驱动</span>
+  <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/footer.css" />
+
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span class="copyright">© Axolotl Wiki ·  2024 </span>
+                <span class="divider">|</span>
+                <span class="theme-info">由 Allay & Axolotl 主题驱动</span>
+            </div>
+            <div class="footer-right">
+                <span class="footer-note"> Why this name?... Minecraft. </span>
+            </div>
+        </div>
     </div>
-</footer>
- 
+</footer> 
 
   <link rel="stylesheet" href="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/css/toc.css" />
   <script src="https://pkusoftwareengineeringteam.github.io/Axolotl-Wiki-Pages/js/toc.js"></script>

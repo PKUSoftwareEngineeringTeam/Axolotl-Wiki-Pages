@@ -1,3 +1,7 @@
+:root {
+    --h: var(--blue-9);
+}
+
 .toc-sidebar {
     position: fixed;
 
@@ -13,11 +17,11 @@
     overflow-y: auto;
 
     /* 视觉风格 */
-    background: var(--bg-elevated);
+    background: rgba(var(--gray-1-rgb), 0.8);
     backdrop-filter: blur(12px);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
+    border: 1px solid rgba(var(--gray-3-rgb), 0.4);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     z-index: 90;
 
@@ -25,7 +29,7 @@
 
     /* 滚动条美化 */
     scrollbar-width: thin;
-    scrollbar-color: var(--border-subtle) transparent;
+    scrollbar-color: var(--gray-7) transparent;
     padding-top: 0 !important;
 }
 
@@ -40,13 +44,12 @@
     margin-top: 0;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--fg);
-    border-bottom: 1px solid var(--border-subtle);
+    color: var(--gray-9);
+    border-bottom: 1px solid var(--gray-3);
     padding-bottom: 0.6rem;
     margin-bottom: 0.6rem;
 }
 
-/* 链接样式优化 */
 .toc-sidebar ul {
     list-style: none;
     padding: 0;
@@ -59,7 +62,7 @@
 
 .toc-sidebar a {
     text-decoration: none;
-    color: var(--fg-muted);
+    color: var(--gray-7);
     font-size: 0.8rem;
     display: block;
     padding: 5px 8px;
@@ -73,63 +76,76 @@
 }
 
 .toc-sidebar a:hover {
-    color: var(--accent-strong);
-    /* 使用强调色文字 */
-    background: var(--accent-soft);
-    /* 使用强调色背景 */
+    color: var(--arcoblue-8);
+    background: var(--arcoblue-1);
     font-weight: 600;
-    /* 稍微加粗 */
-    border-left: 3px solid var(--accent-strong);
-    /* 左侧加一个指示条，增强视觉提示 */
+    border-left: 3px solid var(--arcoblue-7);
     padding-left: 5px;
     white-space: normal;
-
-
     overscroll-behavior: contain;
-    /* 悬停时展开文字 */
 }
 
-/* 二级标题缩进 */
-/* bullets for different levels */
+[data-theme="dark"] .toc-sidebar a:hover {
+    background: var(--gray-2);
+}
+
 .toc-h2 {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--h);
 }
-.toc-sidebar a.toc-h2::before { background: var(--h); }
+
+.toc-sidebar a.toc-h2::before {
+    background: var(--h);
+}
+
 .toc-h3 {
     margin-left: 8px;
     font-size: 0.88rem;
-    color: var(--fg-muted);
+    color: var(--gray-7);
     opacity: 0.9;
 }
-.toc-sidebar a.toc-h3::before { background: var(--fg-muted); }
+
+.toc-sidebar a.toc-h3::before {
+    background: var(--gray-7);
+}
+
 .toc-h4 {
     margin-left: 16px;
     font-size: 0.83rem;
-    color: var(--fg-muted);
+    color: var(--gray-7);
     opacity: 0.85;
 }
-.toc-sidebar a.toc-h4::before { background: rgba(0,0,0,0.08); }
+
+.toc-sidebar a.toc-h4::before {
+    background: rgba(0, 0, 0, 0.08);
+}
+
 .toc-h5 {
     margin-left: 24px;
     font-size: 0.78rem;
-    color: var(--fg-muted);
+    color: var(--gray-7);
     opacity: 0.8;
 }
-.toc-sidebar a.toc-h5::before { background: rgba(0,0,0,0.06); }
+
+.toc-sidebar a.toc-h5::before {
+    background: rgba(0, 0, 0, 0.06);
+}
+
 .toc-h6 {
     margin-left: 32px;
     font-size: 0.75rem;
-    color: var(--fg-muted);
+    color: var(--gray-7);
     opacity: 0.75;
 }
-.toc-sidebar a.toc-h6::before { background: rgba(0,0,0,0.04); }
+
+.toc-sidebar a.toc-h6::before {
+    background: rgba(0, 0, 0, 0.04);
+}
 
 .toc-sidebar a.active {
-    color: var(--accent-strong);
+    color: var(--arcoblue-8);
     font-weight: 600;
-    /* 稍微加粗 */
 }
 
 .toc-sidebar a::before {
@@ -138,16 +154,14 @@
 
 .toc-sidebar a.active::before {
     transform: scale(1.2);
-    background: var(--accent-strong);
+    background: var(--arcoblue-8);
 }
 
 .toc-title {
     position: sticky;
     top: 0;
-    /* 粘在容器顶部 */
     z-index: 10;
-    /* 保证层级最高，盖住滚上来的文字 */
-    background-color: var(--bg-elevated);
+    background-color: var(--gray-1);
     backdrop-filter: blur(100px);
     margin: 0;
     padding-top: 20px;

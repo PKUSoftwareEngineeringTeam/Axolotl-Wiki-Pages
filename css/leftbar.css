@@ -15,7 +15,7 @@ aside {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     padding: 30px 25px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--bg-elevated);
+    background-color: var(--gray-1);
     overflow-y: auto;
     position: sticky;
 }
@@ -30,7 +30,7 @@ aside {
     height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #f0f2f5;
+    border: 4px solid var(--gray-3);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
@@ -42,21 +42,21 @@ aside {
 .name {
     font-size: 24px;
     font-weight: 700;
-    color: #2c3e50;
+    color: var(--gray-10);
     text-align: center;
     margin-bottom: 8px;
 }
 
 .title {
     font-size: 16px;
-    color: #7f8c8d;
+    color: var(--gray-7);
     text-align: center;
     margin-bottom: 25px;
     font-weight: 500;
 }
 
 .bio {
-    color: #5a6c7d;
+    color: var(--gray-6);
     line-height: 1.6;
     margin-bottom: 25px;
     text-align: center;
@@ -65,7 +65,7 @@ aside {
 }
 
 .contact-info {
-    background-color: #f8f9fa;
+    background-color: var(--gray-2);
     border-radius: 12px;
     padding: 20px;
     margin-bottom: 25px;
@@ -75,7 +75,7 @@ aside {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    color: #5a6c7d;
+    color: var(--gray-9);
     transition: color 0.2s ease;
 }
 
@@ -84,25 +84,25 @@ aside {
 }
 
 .contact-item:hover {
-    color: #3498db;
+    color: var(--arcoblue-7);
 }
 
 .contact-icon {
     width: 36px;
     height: 36px;
-    background-color: #e9ecef;
+    background-color: var(--gray-3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-right: 15px;
-    color: #5a6c7d;
+    color: var(--gray-6);
     transition: all 0.2s ease;
 }
 
 .contact-item:hover .contact-icon {
-    background-color: #3498db;
-    color: white;
+    background-color: var(--arcoblue-6);
+    color: var(--gray-1);
 }
 
 .contact-text {
@@ -120,18 +120,18 @@ aside {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #f0f2f5;
+    background-color: var(--gray-3);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #5a6c7d;
+    color: var(--gray-6);
     transition: all 0.2s ease;
     text-decoration: none;
 }
 
 .social-link:hover {
-    background-color: #3498db;
-    color: white;
+    background-color: var(--arcoblue-6);
+    color: var(--gray-1);
     transform: translateY(-3px);
 }
 
@@ -149,12 +149,12 @@ aside {
 .stat-number {
     font-size: 22px;
     font-weight: 700;
-    color: #2c3e50;
+    color: var(--gray-10);
     display: block;
 }
 
 .stat-label {
     font-size: 13px;
-    color: #7f8c8d;
+    color: var(--gray-6);
     margin-top: 5px;
 }

@@ -84,6 +84,46 @@ function organizeBlogPosts() {
     });
 }
 
+async function fetchReadingTimeMap() {
+    const readingMap = workspace("reading_time.json");
+    try {
+        const response = await fetch(readingMap);
+        if (!response.ok) {
+            console.error('Failed to fetch sitemap:', response.statusText);
+            return null;
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching sitemap:', error);
+        return null;
+    }
+}
+
+function toMd(url) {
+    if (url.endsWith('/')) {
+        return url + 'index.md';
+    } else {
+        return url + '.md';
+    }
+}
+
+async function getReadingTime() {
+    const blogCards = document.querySelectorAll('.blog-card');
+    const readingMap = await fetchReadingTimeMap();
+    if (!readingMap) return;
+    blogCards.forEach(card => {
+        const url = card.getAttribute('href').trim();
+        const md = toMd(url);
+        const time = readingMap.entries[md];
+        if (time) {
+            const readSpan = card.querySelector('.blog-card-read');
+            readSpan.style.display = 'inline';
+            readSpan.textContent = `约 ${time} 分钟`;
+        }
+    })
+}
+
 function performSearch(query) {
     const blogCards = document.querySelectorAll('.blog-card');
     let hasResults = false;
@@ -217,4 +257,5 @@ function initSearch() {
 document.addEventListener('DOMContentLoaded', function () {
     initSearch();
     organizeBlogPosts();
+    getReadingTime();
 });
