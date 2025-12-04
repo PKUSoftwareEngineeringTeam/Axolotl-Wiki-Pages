@@ -1,21 +1,21 @@
 {
   "entries": {
-    "contents/custom-themes/structure.md": 3,
-    "contents/configuration/cli.md": 2,
-    "contents/custom-contents/create-pages.md": 3,
-    "contents/getting-started/index.md": 5,
-    "contents/extra-functions/shortcode.md": 3,
-    "contents/configuration/index.md": 2,
-    "contents/welcome.md": 2,
-    "contents/allay-template/index.md": 5,
-    "contents/about.md": 9,
-    "contents/allay-template/variables.md": 2,
-    "contents/allay-template/commands.md": 6,
-    "contents/getting-started/file-structure.md": 2,
-    "contents/allay-template/practice.md": 11,
-    "contents/custom-contents/front-matter.md": 2,
-    "contents/allay-template/scope.md": 4,
-    "contents/demo.md": 5,
-    "contents/allay-template/layout.md": 2
+    "custom-contents/front-matter.md": 2,
+    "allay-template/scope.md": 4,
+    "allay-template/practice.md": 11,
+    "configuration/index.md": 2,
+    "welcome.md": 2,
+    "custom-themes/structure.md": 3,
+    "about.md": 9,
+    "configuration/cli.md": 2,
+    "extra-functions/shortcode.md": 3,
+    "allay-template/variables.md": 2,
+    "custom-contents/create-pages.md": 3,
+    "allay-template/index.md": 5,
+    "getting-started/file-structure.md": 2,
+    "allay-template/layout.md": 2,
+    "getting-started/index.md": 5,
+    "allay-template/commands.md": 6,
+    "demo.md": 5
   }
 }
