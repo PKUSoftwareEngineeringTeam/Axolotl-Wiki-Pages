@@ -21,6 +21,8 @@
 
     outline: none;
     padding: 0;
+    user-select: none;
+    touch-action: none;
 }
 
 .floating-theme-btn:active {
@@ -40,21 +42,28 @@
 .floating-theme-btn .icon-moon-float {
     display: block !important;
     color: var(--toggle-moon);
+    animation: moonEnter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 [data-theme="dark"] .floating-theme-btn .icon-sun-float {
     display: block !important;
     color: var(--toggle-sun);
-    animation: rotateIn 0.5s;
+    animation: sunEnter 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 [data-theme="dark"] .floating-theme-btn .icon-moon-float {
     display: none !important;
 }
 
-@keyframes rotateIn {
+
+.floating-theme-btn.dragging {
+    transition: none !important;
+    cursor: grabbing;
+}
+
+@keyframes sunEnter {
     from {
-        transform: rotate(-90deg) scale(0.5);
+        transform: rotate(-180deg) scale(0.5);
         opacity: 0;
     }
 
@@ -67,5 +76,21 @@
 @media (max-width: 768px) {
     .floating-theme-btn {
         display: flex;
+    }
+}
+
+@keyframes moonEnter {
+    0% {
+        transform: rotate(90deg) scale(0.5);
+        opacity: 0;
+    }
+
+    80% {
+        transform: rotate(-10deg) scale(1.1);
+    }
+
+    100% {
+        transform: rotate(0) scale(1);
+        opacity: 1;
     }
 }

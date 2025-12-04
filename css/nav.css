@@ -14,10 +14,10 @@
 
 .header {
     position: fixed;
-    width: 100vw;
-    top: 0;
+    width: 100%;
     left: 0;
     right: 0;
+    top: 0;
     z-index: 1000;
     transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     border-bottom: 1px solid var(--nav-border-color);
