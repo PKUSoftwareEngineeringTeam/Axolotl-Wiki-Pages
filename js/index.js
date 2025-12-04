@@ -1,13 +1,19 @@
 function typeWriterEffect() {
     const subtitleText = document.getElementById('data-subtitle').getAttribute('data-subtitle').trim();
     const typewriterElement = document.getElementById('typewriter-subtitle');
+    const cursor = '<span class="typing-cursor">|</span>';
+    typewriterElement.innerHTML = subtitleText + cursor;
+    const rect = typewriterElement.getBoundingClientRect();
+    typewriterElement.style.display = 'inline-block';
+    // 锁定最小宽高，防止容器塌陷或跳动
+    typewriterElement.style.minWidth = `${rect.width}px`;
+    typewriterElement.style.minHeight = `${rect.height}px`;
+    typewriterElement.style.textAlign = 'center';
+    typewriterElement.innerHTML = cursor;
 
     let i = 0;
     const speed = 70;
-    const cursor = '<span class="typing-cursor">|</span>';
-
-    typewriterElement.innerHTML = cursor;
-
+    
     function typeCharacter() {
         if (i < subtitleText.length) {
             typewriterElement.innerHTML =
@@ -16,7 +22,6 @@ function typeWriterEffect() {
             setTimeout(typeCharacter, speed);
         }
     }
-
     setTimeout(typeCharacter, 500);
 }
 
@@ -28,7 +33,19 @@ function listenHeaderAndContent() {
     const content = document.querySelector('.content');
     const background = document.querySelector('.background-image');
 
+    const isResponsiveMode = () => window.innerWidth <= 768;
+
+    function checkHeaderState() {
+        if (isResponsiveMode()) {
+            header.classList.add('visible');
+        }
+    }
+
+    checkHeaderState();
+    window.addEventListener('resize', checkHeaderState);
+
     document.addEventListener('mousemove', (e) => {
+        if (isResponsiveMode()) return;
         if (e.clientY < 100) {
             header.classList.add('visible');
         } else {
@@ -45,6 +62,7 @@ function listenHeaderAndContent() {
     });
 
     header.addEventListener('mouseleave', () => {
+        if (isResponsiveMode()) return;
         header.classList.remove('visible');
     });
 
@@ -105,7 +123,7 @@ class LeavesParticleSystem {
         const promises = [];
         for (let i = 0; i <= 11; i++) {
             const img = new Image();
-            img.src = workspace(`/images/leaf/leaf_${i}.png`);
+            img.src = workspace(`images/leaf/leaf_${i}.png`);
             promises.push(new Promise((resolve) => {
                 img.onload = resolve;
             }));

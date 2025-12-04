@@ -14,7 +14,7 @@
     background: var(--gray-1);
     border-radius: 12px;
     padding: 2.2rem 2.0rem 2.4rem;
-    box-shadow: rbga(var(--gray-10), 0.1) 0px 4px 12px;
+    box-shadow: rgba(var(--gray-10), 0.1) 0px 4px 12px;
     border: 1px solid rgba(var(--gray-9), 0.2);
     box-sizing: border-box;
 }
@@ -250,7 +250,7 @@
     border-left: 4px solid rgba(var(--gray-5-rgb), 0.6);
     border-radius: var(--radius-lg, 0.8rem);
 
-    background: rgba(var(--arcoblue-8-rgb), 0.3);
+    background: rgba(var(--blue-2-rgb), 0.3);
     color: var(--fg);
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);

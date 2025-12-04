@@ -24,6 +24,8 @@ function initTheme() {
 window.addEventListener('DOMContentLoaded', initTheme);
 
 document.getElementById('theme-toggle').addEventListener('change', toggleTheme);
+document.getElementById('floating-theme-btn').addEventListener('click', toggleTheme);
+
 
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
     if (!localStorage.getItem('theme')) {

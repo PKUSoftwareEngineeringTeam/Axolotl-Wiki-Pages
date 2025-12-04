@@ -14,6 +14,7 @@
 
 .header {
     position: fixed;
+    width: 100vw;
     top: 0;
     left: 0;
     right: 0;
@@ -170,13 +171,16 @@
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
     .github-corner:hover .octo-arm {
         animation: none;
     }
 
     .github-corner .octo-arm {
         animation: octocat-wave 560ms ease-in-out;
+    }
+    .theme-toggle-container {
+        display: none !important;
     }
 }
 
@@ -276,4 +280,59 @@
 
 .toggle-input:checked+.toggle-slider .icon-moon {
     opacity: 1;
+}
+
+
+
+@media (min-width: 769px) {
+
+    .nav-brand {
+        flex: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-menu {
+        flex: 0 0 auto;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .theme-toggle-container {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+}
+
+
+/* 响应式字体调整 */
+@media (max-width: 768px) {
+
+    .nav-brand span {
+        font-size: 1.1rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .nav.nav-container {
+        padding: 0 1.2rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-brand span {
+        font-size: 1rem;
+    }
+
+    .nav-link {
+        font-size: 0.85rem;
+    }
 }

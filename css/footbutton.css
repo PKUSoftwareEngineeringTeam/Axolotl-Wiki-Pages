@@ -1,0 +1,71 @@
+/* 悬浮按钮基础样式 */
+.floating-theme-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(var(--nav-color), 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--nav-border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+    cursor: pointer;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    outline: none;
+    padding: 0;
+}
+
+.floating-theme-btn:active {
+    transform: scale(0.9);
+}
+
+.floating-theme-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.5s ease;
+}
+
+
+.floating-theme-btn .icon-sun-float {
+    display: none !important;
+}
+
+.floating-theme-btn .icon-moon-float {
+    display: block !important;
+    color: var(--toggle-moon);
+}
+
+[data-theme="dark"] .floating-theme-btn .icon-sun-float {
+    display: block !important;
+    color: var(--toggle-sun);
+    animation: rotateIn 0.5s;
+}
+
+[data-theme="dark"] .floating-theme-btn .icon-moon-float {
+    display: none !important;
+}
+
+@keyframes rotateIn {
+    from {
+        transform: rotate(-90deg) scale(0.5);
+        opacity: 0;
+    }
+
+    to {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-theme-btn {
+        display: flex;
+    }
+}

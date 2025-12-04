@@ -96,7 +96,6 @@ body {
 .title {
     font-size: 3.5rem;
     font-weight: 700;
-    color: #333;
     margin-bottom: 2rem;
     background: linear-gradient(135deg, var(--title-1) 0%, var(--title-2) 100%);
     -webkit-background-clip: text;
@@ -104,6 +103,8 @@ body {
     background-clip: text;
     letter-spacing: -0.5px;
     line-height: 1.2;
+    background-size: 200% 200%;
+    animation: gradientBreathe 3s ease-in-out infinite alternate;
 }
 
 .subtitle {
@@ -263,6 +264,16 @@ body {
     opacity: 1;
 }
 
+@keyframes gradientBreathe {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -286,13 +297,31 @@ body {
         gap: 1.5rem;
     }
 
+    .content {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
     .title {
         font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+    .subtitle {
+        white-space: normal !important;
+        height: auto;
+        min-height: 1.5em;
+        overflow: visible;
+        line-height: 1.6;
+        word-wrap: break-word;
+        padding: 0 10px;
     }
 
-    .content {
-        padding: 2rem 1.5rem;
-        margin: 0 1rem;
+    .content:hover {
+        box-shadow: none;
+    }
+
+    .buttons-container {
+        margin-top: 0;
+        gap: 1rem;
     }
 
     .floating-btn {
@@ -302,24 +331,28 @@ body {
     }
 
     .buttons-container {
-        gap: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .title {
-        font-size: 2rem;
-    }
-
-    .floating-btn {
-        width: 130px;
-        height: 130px;
-    }
-
-    .buttons-container {
-        flex-direction: column;
-        align-items: center;
-    }
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            width: 100%;
+            margin-top: 1rem;
+            flex-direction: row;
+            align-items: stretch;
+        }
+    
+        .floating-btn {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            max-width: 130px;
+            margin: 0 auto;
+            font-size: 0.9rem;
+        }
+    
+        .floating-btn i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+        }
 }
 
 
