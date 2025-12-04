@@ -105,7 +105,7 @@ class LeavesParticleSystem {
         const promises = [];
         for (let i = 0; i <= 11; i++) {
             const img = new Image();
-            img.src = `/images/leaf/leaf_${i}.png`;
+            img.src = workspace(`/images/leaf/leaf_${i}.png`);
             promises.push(new Promise((resolve) => {
                 img.onload = resolve;
             }));
