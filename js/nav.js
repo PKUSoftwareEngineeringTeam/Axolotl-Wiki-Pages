@@ -66,7 +66,6 @@ function makeDraggable(element, onClick, onDragEnd) {
 
     const onEnd = (e) => {
         if (!isDragging) return;
-        if (e.type === 'mouseup') return;
 
         isDragging = false;
         element.classList.remove('dragging');
@@ -128,9 +127,21 @@ function initTheme() {
             }
         }
 
+        let isToggling = false;
+        const handleToggle = () => {
+            if (isToggling) return;
+
+            isToggling = true;
+            toggleTheme();
+            setTimeout(() => {
+                isToggling = false;
+            }, 200);
+        };
+
+
         makeDraggable(
             floatBtn,
-            toggleTheme, // 点击回调
+            handleToggle, // 点击回调
             (left, top) => { // 拖拽结束回调
                 localStorage.setItem('floatBtnPos', JSON.stringify({ left, top }));
             }
