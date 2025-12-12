@@ -14,8 +14,7 @@
     background: var(--gray-1);
     border-radius: 12px;
     padding: 2.2rem 2.0rem 2.4rem;
-    box-shadow: rgba(var(--gray-10), 0.1) 0px 4px 12px;
-    border: 1px solid rgba(var(--gray-9), 0.2);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 8px;
     box-sizing: border-box;
 }
 

@@ -46,16 +46,15 @@
 }
 
 .divider {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--gray-5);
 }
 
 .theme-info {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.9rem;
+    color: var(--gray-6);
 }
 
 .footer-right .footer-note {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(var(--gray-3-rgb), 0.6);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.85rem;
