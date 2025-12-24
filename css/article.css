@@ -408,3 +408,37 @@
     color: var(--h) !important;
 
 }
+
+pre {
+    position: relative; 
+}
+
+.copy-code-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #8b949e;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0; 
+}
+
+pre:hover .copy-code-btn {
+    opacity: 1;
+}
+
+.copy-code-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #c9d1d9;
+}
+
+.copy-code-btn.copied {
+    color: #2ea043;
+    border-color: #2ea043;
+}

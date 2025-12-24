@@ -1,9 +1,47 @@
 window.addEventListener('scroll', function () {
     const header = document.getElementById('header');
-    if (window.scrollY > 100) {
-        header.classList.add('scrolled');
+    const progressBtn = document.getElementById('floating-progress-btn');
+    const progressNum = document.querySelector('.floating-progress-btn .progress-num');
+    
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    
+    if (scrollTop > 100) {
+        if (header) header.classList.add('scrolled');
     } else {
-        header.classList.remove('scrolled');
+        if (header) header.classList.remove('scrolled');
+    }
+
+    if (progressBtn) {
+        if (scrollTop > 100) {
+            progressBtn.classList.add('visible');
+            
+            const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+           
+            let scrollPercent = 0;
+            if (docHeight > 0) {
+                scrollPercent = Math.round((scrollTop / docHeight) * 100);
+            }
+           
+            scrollPercent = Math.min(100, Math.max(0, scrollPercent));
+            
+            if (progressNum) {
+                progressNum.textContent = scrollPercent + '%';
+            }
+        } else {
+            progressBtn.classList.remove('visible');
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const progressBtn = document.getElementById('floating-progress-btn');
+    if (progressBtn) {
+        progressBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
     }
 });
 
